@@ -28,7 +28,7 @@ export const login = async (req, res) => {
                 message: "Incorrect password"
             });
         }
-
+        const userRole  = validateExistence.role
         const accessToken = jwt.sign({
             userID: validateExistence._id
         }, process.env.jwt, { expiresIn: "1d" });
@@ -52,7 +52,9 @@ export const login = async (req, res) => {
         });
 
         res.status(200).json({
-            message: "Logged in successfully"
+            message: "Logged in successfully",
+            userRole : userRole,
+            accessToken: accessToken
         });
 
     } catch (error) {
