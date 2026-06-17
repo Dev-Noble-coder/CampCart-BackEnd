@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampCart API Hub & Integration Guide</title>
+    <!-- Modern Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Premium Emerald-Green & White Theme Palette */
+            --bg-base: #f0fdf4;
+            /* Very soft light green background */
+            --bg-surface: #ffffff;
+            /* Clean white card surfaces */
+            --bg-surface-elevated: #f9fafb;
+            /* Soft white/gray for details */
+            --primary: #059669;
+            /* Rich Emerald Green */
+            --primary-light: #10b981;
+            /* Vibrant Emerald Green */
+            --primary-dark: #047857;
+            /* Forest Green */
+            --primary-glow: rgba(16, 185, 129, 0.08);
+            /* Soft green glow */
+            --secondary: #047857;
+            /* Deep Forest Green (unified) */
+            --secondary-glow: rgba(4, 120, 87, 0.08);
+            --text-primary: #0f172a;
+            /* Slate 900 for dark text */
+            --text-secondary: #1e293b;
+            /* Dark slate for high contrast */
+            --text-muted: #64748b;
+            /* Slate 500 for muted elements */
+            --border: #e2e8f0;
+            /* Soft gray border */
+            --border-focus: #10b981;
+            /* Emerald green focus border */
+            --error: #dc2626;
+            --error-glow: rgba(220, 38, 38, 0.05);
+            --success-bg: rgba(16, 185, 129, 0.1);
+            --success-text: #047857;
+            --warning-bg: rgba(245, 158, 11, 0.1);
+            --warning-text: #b45309;
+
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-premium: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 10px -1px rgba(0, 0, 0, 0.03);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* 3-Pane Layout Styling */
+        .app-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr 380px;
+            min-height: 100vh;
+        }
+
+        .mobile-navbar {
+            display: none;
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .backdrop-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .backdrop-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+
+        /* Left Sidebar Pane */
+        .sidebar-pane {
+            background-color: var(--bg-surface);
+            border-right: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            overflow-y: auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #0f172a, #475569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-section-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            padding-left: 12px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background-color: rgba(16, 185, 129, 0.04);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            background-color: var(--primary-glow);
+            font-weight: 600;
+        }
+
+        .nav-link .badge {
+            margin-left: auto;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .nav-link .badge.post {
+            background-color: rgba(16, 185, 129, 0.08);
+            color: var(--primary);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+        }
+
+        /* Center Main Documentation Pane */
+        .doc-pane {
+            padding: 50px 6%;
+            overflow-y: auto;
+            max-width: 950px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .header-section {
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #0f172a 60%, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 650px;
+        }
+
+        /* Base URL Container Styling */
+        .base-url-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 45px;
+            box-shadow: var(--shadow-premium);
+        }
+
+        .base-url-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .base-url-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .base-url-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            gap: 15px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+
+        .base-url-text {
+            color: var(--text-secondary);
+            flex-grow: 1;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            border-radius: 6px;
+        }
+
+        .icon-btn:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-surface-elevated);
+        }
+
+        /* Auth Banner Info */
+        .info-banner {
+            border-left: 4px solid var(--secondary);
+            background-color: rgba(99, 102, 241, 0.05);
+            padding: 16px 20px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .info-banner strong {
+            color: var(--text-primary);
+        }
+
+        /* Endpoint Card Styles */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin: 50px 0 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-primary);
+        }
+
+        .endpoint-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-premium);
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .endpoint-card:hover {
+            border-color: var(--border-focus);
+            transform: translateY(-2px);
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            padding: 22px 24px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .endpoint-header:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .badge-method {
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-right: 18px;
+            min-width: 75px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-method.post {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--primary-light);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-method.auth-tag {
+            background-color: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .endpoint-path {
+            font-family: var(--font-mono);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .endpoint-short-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-left: auto;
+            margin-right: 25px;
+        }
+
+        .chevron-icon {
+            color: var(--text-muted);
+            transition: var(--transition-smooth);
+        }
+
+        .endpoint-card.open .chevron-icon {
+            transform: rotate(180deg);
+            color: var(--primary-light);
+        }
+
+        .endpoint-details {
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            background-color: rgba(16, 185, 129, 0.015);
+            display: none;
+        }
+
+        .endpoint-card.open .endpoint-details {
+            display: block;
+        }
+
+        .detail-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .detail-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* JSON Block and Syntax Highlighting */
+        .code-container {
+            position: relative;
+            background-color: #080c14;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-lang {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        pre.code-block {
+            padding: 18px;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            color: #e5e7eb;
+            margin: 0;
+        }
+
+        .json-key {
+            color: #818cf8;
+        }
+
+        .json-string {
+            color: #34d399;
+        }
+
+        .json-number {
+            color: #fbbf24;
+        }
+
+        .json-boolean {
+            color: #f472b6;
+        }
+
+        .json-comment {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Parameters Table */
+        .params-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            text-align: left;
+            display: block;
+            overflow-x: auto;
+        }
+
+        .params-table th,
+        .params-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .params-table th {
+            background-color: rgba(255, 255, 255, 0.02);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .params-table td.param-name {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--primary-light);
+        }
+
+        .params-table td.param-type {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .params-table td.param-req {
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .params-table td.param-req.required {
+            color: #f87171;
+        }
+
+        .params-table td.param-req.optional {
+            color: var(--text-muted);
+        }
+
+        /* Error/Response Box Styling */
+        .response-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .status-success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--primary-light);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .error-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .error-row {
+            background-color: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .error-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .error-code-label {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ef4444;
+        }
+
+        .error-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .error-response-snippet {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            background-color: #080c14;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            color: #d1d5db;
+        }
+
+        /* Right Interactive Playground Pane */
+        .playground-pane {
+            background-color: var(--bg-surface);
+            border-left: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .playground-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            background-color: rgba(0, 0, 0, 0.01);
+        }
+
+        .playground-header h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-light);
+        }
+
+        .playground-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            flex-grow: 1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        .select-input,
+        .text-input {
+            width: 100%;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .select-input:focus,
+        .text-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+        }
+
+        .tabs-container {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border-bottom: 2px solid transparent;
+            text-align: center;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-light);
+            border-bottom-color: var(--primary);
+        }
+
+        .copy-banner {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 8px;
+        }
+
+        /* Toast Popup Alert */
+        .toast-alert {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--bg-surface-elevated);
+            color: var(--text-primary);
+            padding: 14px 24px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateY(150px);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .toast-alert.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* =============================================
+           INTEGRATION SANDBOX (Right Pane)
+        ============================================= */
+        .sandbox-pane {
+            background-color: var(--bg-surface);
+            border-left: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .sandbox-header {
+            padding: 20px 22px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, rgba(16,185,129,0.04), rgba(4,120,87,0.06));
+            flex-shrink: 0;
+        }
+
+        .sandbox-header h2 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-light);
+            margin-bottom: 4px;
+        }
+
+        .sandbox-header p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .sandbox-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .sandbox-select {
+            width: 100%;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 11px 14px;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 0.88rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+
+        .sandbox-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(16,185,129,0.12);
+        }
+
+        .sandbox-tabs {
+            display: flex;
+            background-color: var(--bg-base);
+            border-radius: 8px;
+            padding: 3px;
+            gap: 3px;
+            border: 1px solid var(--border);
+        }
+
+        .sandbox-tab {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border-radius: 6px;
+            font-family: var(--font-main);
+        }
+
+        .sandbox-tab.active {
+            background-color: var(--bg-surface);
+            color: var(--primary);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .sandbox-code-wrapper {
+            position: relative;
+            background-color: #080c14;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        .sandbox-code-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sandbox-code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot.red   { background-color: #f87171; }
+        .dot.yellow{ background-color: #fbbf24; }
+        .dot.green { background-color: #34d399; }
+
+        .sandbox-copy-btn {
+            background: rgba(16,185,129,0.1);
+            border: 1px solid rgba(16,185,129,0.25);
+            color: var(--primary-light);
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font-main);
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .sandbox-copy-btn:hover {
+            background: rgba(16,185,129,0.2);
+        }
+
+        .sandbox-code-pre {
+            padding: 18px;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #e5e7eb;
+            margin: 0;
+            white-space: pre;
+            line-height: 1.7;
+            min-height: 280px;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+        .sandbox-note {
+            background: rgba(16,185,129,0.06);
+            border: 1px solid rgba(16,185,129,0.15);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .sandbox-note strong {
+            color: var(--primary);
+        }
+
+        /* form label in sandbox */
+        .sandbox-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        /* =============================================
+           FULL RESPONSIVENESS
+        ============================================= */
+        @media (max-width: 1280px) {
+            .app-layout {
+                grid-template-columns: 260px 1fr 360px;
+            }
+        }
+
+        /* Laptops 960px–1279px: tighter 3-column layout */
+        @media (max-width: 1279px) and (min-width: 960px) {
+            .app-layout {
+                grid-template-columns: 220px 1fr 300px;
+            }
+            .sandbox-body {
+                padding: 14px;
+                gap: 12px;
+            }
+            .sandbox-code-pre {
+                font-size: 0.75rem;
+                min-height: 220px;
+            }
+        }
+
+        /* Below 960px (tablets/phones): sandbox slides in as drawer */
+        @media (max-width: 959px) {
+            .app-layout {
+                grid-template-columns: 240px 1fr;
+            }
+
+            .sandbox-pane {
+                position: fixed !important;
+                right: -100%;
+                width: 380px;
+                max-width: 95vw;
+                z-index: 101;
+                height: 100vh;
+                top: 0;
+                transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -8px 0 32px rgba(0,0,0,0.12);
+            }
+
+            .sandbox-pane.mobile-open {
+                right: 0;
+            }
+
+            .mobile-navbar {
+                display: flex;
+            }
+
+            .doc-pane {
+                padding-top: 10px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .app-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-pane {
+                position: fixed !important;
+                left: -100%;
+                width: 280px;
+                z-index: 101;
+                height: 100vh;
+                top: 0;
+                transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 8px 0 32px rgba(0,0,0,0.12);
+            }
+
+            .sidebar-pane.mobile-open {
+                left: 0;
+            }
+
+            .doc-pane {
+                padding: 20px 5%;
+            }
+
+            .header-section h1 {
+                font-size: 1.9rem;
+            }
+
+            .endpoint-path {
+                font-size: 0.85rem;
+                word-break: break-all;
+            }
+
+            .endpoint-short-desc {
+                display: none;
+            }
+
+            .error-row {
+                flex-direction: column;
+            }
+
+            .error-response-snippet {
+                word-break: break-all;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .doc-pane {
+                padding: 16px 4%;
+            }
+
+            .header-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .badge-method {
+                font-size: 0.72rem;
+                padding: 5px 8px;
+                min-width: 60px;
+                margin-right: 10px;
+            }
+
+            .endpoint-header {
+                padding: 16px;
+            }
+
+            .endpoint-details {
+                padding: 16px;
+            }
+
+            .base-url-card {
+                padding: 16px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .params-table th,
+            .params-table td {
+                padding: 10px 10px;
+                font-size: 0.82rem;
+            }
+        }
+
+        /* Mobile Navbar sandbox toggle button */
+        .sandbox-toggle-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--font-main);
+            transition: var(--transition-smooth);
+        }
+
+        .sandbox-toggle-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Toast (improved) */
+        .toast-alert {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #0f172a;
+            color: #f1f5f9;
+            padding: 14px 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 2000;
+            transform: translateY(80px);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: calc(100vw - 40px);
+        }
+
+        .toast-alert.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mobile Header Bar -->
+    <header class="mobile-navbar">
+        <button class="icon-btn" onclick="toggleMobileSidebar()" aria-label="Toggle Navigation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <div class="logo-container" style="gap: 8px;">
+            <div class="logo-icon" style="width: 32px; height: 32px; border-radius: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+            </div>
+            <span class="logo-text" style="font-size: 1.1rem;">CampCart <span
+                    style="color: var(--primary-light)">API</span></span>
+        </div>
+        <button class="sandbox-toggle-btn" onclick="toggleMobileSandbox()" aria-label="Toggle Sandbox">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            Sandbox
+        </button>
+    </header>
+
+    <!-- Backdrop Overlay for Mobile Sidebars -->
+    <div class="backdrop-overlay" id="backdrop" onclick="closeMobilePanes()"></div>
+
+    <div class="app-layout">
+
+        <!-- Left Navigation Panel -->
+        <aside class="sidebar-pane">
+            <a href="#" class="logo-container">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                </div>
+                <span class="logo-text">CampCart <span style="color: var(--primary-light)">API</span></span>
+            </a>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Getting Started</div>
+                <a href="#overview" class="nav-link active" onclick="setActiveLink(this)">Overview</a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Authentication</div>
+                <a href="#route-signup" class="nav-link" onclick="setActiveLink(this)">
+                    POST /api/v1/signup
+                    <span class="badge post">POST</span>
+                </a>
+                <a href="#route-login" class="nav-link" onclick="setActiveLink(this)">
+                    POST /api/v1/login
+                    <span class="badge post">POST</span>
+                </a>
+            </div>
+        
+            <div class="nav-section">
+                <div class="nav-section-title">User Services</div>
+                <a href="#route-me" class="nav-link" onclick="setActiveLink(this)">
+                    GET /auth/me
+                    <span class="badge get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6;">GET</span>
+                </a>
+                <a href="#route-profile" class="nav-link" onclick="setActiveLink(this)">
+                    POST /users/profile
+                    <span class="badge post">POST</span>
+                </a>
+            </div>
+        
+            <div class="nav-section">
+                <div class="nav-section-title">Vendor Services</div>
+                <a href="#route-create-product" class="nav-link" onclick="setActiveLink(this)">
+                    POST /api/v1/vendor/products
+                    <span class="badge post">POST</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Center Main Documentation Content Panel -->
+        <main class="doc-pane">
+
+            <header class="header-section" id="overview">
+                <h1>CampCart Developer Hub</h1>
+                <p>Welcome to the official developer guide for the CampCart backend integration. Build, manage, and scale the ultimate e-commerce platform across users, vendors, and delivery agents.</p>
+            </header>
+
+            <!-- Base URL & Global Config Card -->
+            <div class="base-url-card">
+                <div class="base-url-header">
+                    <div class="base-url-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                        </svg>
+                        API Server Base URL
+                    </div>
+                </div>
+                <div class="base-url-wrapper">
+                    <span class="base-url-text" id="live-base-url">https://campcart-backend.onrender.com</span>
+                    <button class="icon-btn"
+                        onclick="copyText('https://campcart-backend.onrender.com', 'Base URL copied!')"
+                        title="Copy Base URL">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </div>
+                <p style="margin-top: 15px; font-size: 0.88rem; color: var(--text-secondary);">
+                    💡 <strong>Frontend Integration Requirement:</strong> Make sure your requests include the <code>Content-Type: application/json</code> header. Enable credentials flag (e.g. <code>withCredentials: true</code> in Axios) to allow the backend to send and read cookies if implemented.
+                </p>
+            </div>
+
+            <!-- AUTHENTICATION SECTION -->
+            <div class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    style="color: var(--primary-light)">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Authentication Routes
+            </div>
+
+            <!-- Signup Endpoint -->
+            <div class="endpoint-card" id="route-signup">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method post">POST</span>
+                    <span class="endpoint-path">/api/v1/signup</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/signup')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Create user</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Registers a new user account in the CampCart database. The role dictates access levels across the platform (user, vendor, admin, deliveryAgent).</p>
+
+                    <div class="detail-title">Request Body Fields</div>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Requirement</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="param-name">email</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>A valid email address for account credentials.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">password</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>A secure password (hashed via bcrypt).</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">fullName</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>The full name of the user.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">role</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>Must be <code>user</code>, <code>vendor</code>, <code>admin</code>, or <code>deliveryAgent</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="detail-title">Request Payload Example</div>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="code-lang">JSON</span>
+                            <button class="icon-btn" onclick="copyJsonSnippet('signup-req')" title="Copy JSON">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <pre class="code-block" id="signup-req"><span class="json-key">"email"</span>: <span class="json-string">"john@example.com"</span>,
+<span class="json-key">"password"</span>: <span class="json-string">"securePass123!"</span>,
+<span class="json-key">"fullName"</span>: <span class="json-string">"John Doe"</span>,
+<span class="json-key">"role"</span>: <span class="json-string">"user"</span></pre>
+                    </div>
+
+                    <div class="detail-title">Success Response Example <span class="response-status-badge status-success">201 Created</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"Account created successfully"</span>,
+<span class="json-key">"role"</span>: <span class="json-string">"user"</span></pre>
+                    </div>
+
+                    <div class="detail-title">Error Responses</div>
+                    <div class="error-grid">
+                        <div class="error-row">
+                            <div class="error-info">
+                                <span class="error-code-label">400 Bad Request</span>
+                                <span class="error-desc">Missing email, fullName, password or role.</span>
+                            </div>
+                            <span class="error-response-snippet">{"message": "Email, full name,password or role not provided"}</span>
+                        </div>
+                        <div class="error-row">
+                            <div class="error-info">
+                                <span class="error-code-label">403 Forbidden</span>
+                                <span class="error-desc">User with this email already exists.</span>
+                            </div>
+                            <span class="error-response-snippet">{"message": "User with this info already exists"}</span>
+                        </div>
+                        <div class="error-row">
+                            <div class="error-info">
+                                <span class="error-code-label">500 Internal Server Error</span>
+                                <span class="error-desc">An unexpected server error occurred during creation.</span>
+                            </div>
+                            <span class="error-response-snippet">{"message": "An error occurred", "error": "..."}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Endpoint -->
+            <div class="endpoint-card" id="route-login">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method post">POST</span>
+                    <span class="endpoint-path">/api/v1/login</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/login')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Retrieve access token</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Authenticates credentials and establishes a session for the user.</p>
+
+                    <div class="detail-title">Request Body Fields</div>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Requirement</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="param-name">email</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>The registered account email.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">password</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>The user password.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="detail-title">Request Payload Example</div>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="code-lang">JSON</span>
+                            <button class="icon-btn" onclick="copyJsonSnippet('login-req')" title="Copy JSON">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <pre class="code-block" id="login-req"><span class="json-key">"email"</span>: <span class="json-string">"john@example.com"</span>,
+<span class="json-key">"password"</span>: <span class="json-string">"securePass123!"</span></pre>
+                    </div>
+
+                    <div class="detail-title">Success Response Example <span class="response-status-badge status-success">200 OK</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"Login successful"</span>,
+<span class="json-key">"token"</span>: <span class="json-string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</span></pre>
+                    </div>
+
+                    <div class="detail-title">Error Responses</div>
+                    <div class="error-grid">
+                        <div class="error-row">
+                            <div class="error-info">
+                                <span class="error-code-label">404 Not Found</span>
+                                <span class="error-desc">No registered user matches the provided email.</span>
+                            </div>
+                            <span class="error-response-snippet">{"message": "User not found"}</span>
+                        </div>
+                        <div class="error-row">
+                            <div class="error-info">
+                                <span class="error-code-label">401 Unauthorized</span>
+                                <span class="error-desc">Password validation comparison failed.</span>
+                            </div>
+                            <span class="error-response-snippet">{"message": "Incorrect password"}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+            <!-- USER SERVICES SECTION -->
+            <div class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    style="color: var(--primary-light)">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                User Profile Services
+            </div>
+
+            <!-- Get Current User Endpoint -->
+            <div class="endpoint-card" id="route-me">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">GET</span>
+                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                    <span class="endpoint-path">/api/v1/auth/me</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/auth/me')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Get active user</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Retrieves the verified user data for the active session.</p>
+
+                    <div class="detail-title">Required Request Configuration</div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-comment">// Client must send cookies</span>
+<span class="json-key">"credentials"</span>: <span class="json-string">"include"</span></pre>
+                    </div>
+
+                    <div class="detail-title">Success Response Example <span
+                            class="response-status-badge status-success">200 OK</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"Information pulled"</span>,
+<span class="json-key">"info"</span>: {
+  <span class="json-key">"_id"</span>: <span class="json-string">"64f8a2c1b9..."</span>,
+  <span class="json-key">"fullName"</span>: <span class="json-string">"John Doe"</span>,
+  <span class="json-key">"email"</span>: <span class="json-string">"john@example.com"</span>,
+  <span class="json-key">"role"</span>: <span class="json-string">"user"</span>,
+  <span class="json-key">"status"</span>: <span class="json-string">"active"</span>
+}</pre>
+                    </div>
+
+                    <div class="detail-title">Error Responses</div>
+                    <div class="error-grid">
+                        <div class="error-row">
+                            <div class="error-info">
+                                <span class="error-code-label">401 Unauthorized</span>
+                                <span class="error-desc">Authorization cookie is invalid or missing.</span>
+                            </div>
+                            <span class="error-response-snippet">{"message": "No access token"}</span>
+                        </div>
+                        <div class="error-row">
+                            <div class="error-info">
+                                <span class="error-code-label">404 Not Found</span>
+                                <span class="error-desc">The user matching the token was not found.</span>
+                            </div>
+                            <span class="error-response-snippet">{"message": "User with this info does not exist"}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update Profile Endpoint -->
+            <div class="endpoint-card" id="route-profile">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method post">POST</span>
+                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                    <span class="endpoint-path">/api/v1/users/profile</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/users/profile')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Update user details</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Updates the phone number, address, and business name for the logged-in user or vendor.</p>
+
+                    <div class="detail-title">Required Request Configuration</div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-comment">// Client must send cookies</span>
+<span class="json-key">"credentials"</span>: <span class="json-string">"include"</span></pre>
+                    </div>
+
+                    <div class="detail-title">Request Body Fields</div>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Requirement</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="param-name">phoneNumber</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req optional">Optional</td>
+                                <td>User's contact number.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">address</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req optional">Optional</td>
+                                <td>User's delivery or store address.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">businessName</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req optional">Optional</td>
+                                <td>Store name (only applies to vendors).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="detail-title">Request Payload Example</div>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="code-lang">JSON</span>
+                            <button class="icon-btn" onclick="copyJsonSnippet('profile-req')" title="Copy JSON">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <pre class="code-block" id="profile-req"><span class="json-key">"phoneNumber"</span>: <span class="json-string">"+1234567890"</span>,
+<span class="json-key">"address"</span>: <span class="json-string">"123 Vendor St, Market City"</span>,
+<span class="json-key">"businessName"</span>: <span class="json-string">"Jane's Goods"</span></pre>
+                    </div>
+
+                    <div class="detail-title">Success Response Example <span class="response-status-badge status-success">200 OK</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"Info added successfully"</span>,
+<span class="json-key">"info"</span>: {
+  <span class="json-key">"_id"</span>: <span class="json-string">"64f8a2c1b9..."</span>,
+  <span class="json-key">"phoneNumber"</span>: <span class="json-string">"+1234567890"</span>,
+  <span class="json-key">"address"</span>: <span class="json-string">"123 Vendor St, Market City"</span>,
+  <span class="json-key">"businessName"</span>: <span class="json-string">"Jane's Goods"</span>
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+        
+            <!-- VENDOR SERVICES SECTION -->
+            <div class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    style="color: var(--primary-light)">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                Vendor Services
+            </div>
+
+            <!-- Create Product Endpoint -->
+            <div class="endpoint-card" id="route-create-product">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method post">POST</span>
+                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">VENDOR</span>
+                    <span class="endpoint-path">/api/v1/vendor/products</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/vendor/products')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Create a new product</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Allows an authenticated vendor to create a new product and add it to the platform catalog.</p>
+
+                    <div class="detail-title">Required Request Configuration</div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-comment">// Client must send cookies</span>
+<span class="json-key">"credentials"</span>: <span class="json-string">"include"</span></pre>
+                    </div>
+
+                    <div class="detail-title">Request Body Fields</div>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Requirement</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="param-name">name</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>The name of the product.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">description</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>Detailed product description.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">price</td>
+                                <td class="param-type">number</td>
+                                <td class="param-req required">Required</td>
+                                <td>Product price in the platform's currency.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">category</td>
+                                <td class="param-type">string (ObjectId)</td>
+                                <td class="param-req required">Required</td>
+                                <td>The ID of the category this product belongs to.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">images</td>
+                                <td class="param-type">array of strings</td>
+                                <td class="param-req optional">Optional</td>
+                                <td>List of URLs to the product images.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">stock</td>
+                                <td class="param-type">number</td>
+                                <td class="param-req optional">Optional</td>
+                                <td>Initial stock level (defaults to 0).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="detail-title">Request Payload Example</div>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="code-lang">JSON</span>
+                            <button class="icon-btn" onclick="copyJsonSnippet('product-req')" title="Copy JSON">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <pre class="code-block" id="product-req"><span class="json-key">"name"</span>: <span class="json-string">"Camping Tent"</span>,
+<span class="json-key">"description"</span>: <span class="json-string">"A durable 4-person camping tent."</span>,
+<span class="json-key">"price"</span>: <span class="json-string">129.99</span>,
+<span class="json-key">"category"</span>: <span class="json-string">"64f8b2d1c..."</span>,
+<span class="json-key">"images"</span>: [<span class="json-string">"https://example.com/tent1.jpg"</span>],
+<span class="json-key">"stock"</span>: <span class="json-string">50</span></pre>
+                    </div>
+
+                    <div class="detail-title">Success Response Example <span class="response-status-badge status-success">201 Created</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"Product created successfully"</span>,
+<span class="json-key">"product"</span>: {
+  <span class="json-key">"_id"</span>: <span class="json-string">"64f9c3d2e..."</span>,
+  <span class="json-key">"name"</span>: <span class="json-string">"Camping Tent"</span>,
+  <span class="json-key">"price"</span>: <span class="json-string">129.99</span>,
+  <span class="json-key">"vendor"</span>: <span class="json-string">"64f8a2c1b..."</span>
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Right Integration Sandbox Pane -->
+        <aside class="sandbox-pane" id="sandbox-pane">
+            <div class="sandbox-header">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    Integration Sandbox
+                </h2>
+                <p>Copy ready-to-use code snippets for your frontend</p>
+            </div>
+            <div class="sandbox-body">
+
+                <!-- Endpoint Selector -->
+                <div>
+                    <div class="sandbox-label">Select API Endpoint</div>
+                    <select class="sandbox-select" id="sandbox-endpoint-select" onchange="updateSandboxCode()">
+                        <option value="signup">POST /signup — Create Account</option>
+                        <option value="login">POST /login — Login</option>
+                        <option value="me">GET /auth/me — Get Current User</option>
+                        <option value="update-profile">POST /users/profile — Update Profile</option>
+                        <option value="create-product">POST /vendor/products — Create Product</option>
+                    </select>
+                </div>
+
+                <!-- Language Tabs -->
+                <div>
+                    <div class="sandbox-label">Integration Style</div>
+                    <div class="sandbox-tabs">
+                        <button class="sandbox-tab active" id="tab-fetch" onclick="switchSandboxTab('fetch')">Fetch API</button>
+                        <button class="sandbox-tab" id="tab-axios" onclick="switchSandboxTab('axios')">Axios</button>
+                        <button class="sandbox-tab" id="tab-react" onclick="switchSandboxTab('react')">React Hook</button>
+                    </div>
+                </div>
+
+                <!-- Code Block -->
+                <div class="sandbox-code-wrapper">
+                    <div class="sandbox-code-topbar">
+                        <div class="sandbox-code-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <button class="sandbox-copy-btn" onclick="copySandboxCode()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            Copy Snippet
+                        </button>
+                    </div>
+                    <pre class="sandbox-code-pre" id="sandbox-code-output"></pre>
+                </div>
+
+                <!-- Integration Note -->
+                <div class="sandbox-note">
+                    <strong>⚙️ Base URL:</strong> All snippets use<br>
+                    <code style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--primary);">https://campcart-backend.onrender.com</code><br><br>
+                    <strong>🍪 Cookies:</strong> Login sets <code style="font-family:var(--font-mono);font-size:0.78rem">accessToken</code> &amp; <code style="font-family:var(--font-mono);font-size:0.78rem">refreshToken</code> as HttpOnly cookies automatically.<br><br>
+                    <strong>🔐 Secure Routes:</strong> Include <code style="font-family:var(--font-mono);font-size:0.78rem">credentials: 'include'</code> (Fetch) or <code style="font-family:var(--font-mono);font-size:0.78rem">withCredentials: true</code> (Axios) on all protected routes.
+                </div>
+
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-alert" id="toast-alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span id="toast-message">Copied!</span>
+    </div>
+
+    <script>
+        const BASE_URL = 'https://campcart-backend.onrender.com';
+        let currentTab = 'fetch';
+        let currentEndpoint = 'signup';
+
+        // ============================
+        //  SANDBOX CODE TEMPLATES
+        // ============================
+        const sandboxSnippets = {
+            signup: {
+                fetch: `// Register a new CampCart user
+const response = await fetch('${BASE_URL}/api/v1/signup', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    fullName: 'John Doe',
+    email: 'john@example.com',
+    password: 'securePass123!',
+    role: 'user' // 'user' | 'vendor' | 'admin'
+  })
+});
+
+const data = await response.json();
+console.log(data);`,
+                axios: `// Register a new CampCart user
+import axios from 'axios';
+
+const { data } = await axios.post(
+  '${BASE_URL}/api/v1/signup',
+  {
+    fullName: 'John Doe',
+    email: 'john@example.com',
+    password: 'securePass123!',
+    role: 'user' // 'user' | 'vendor' | 'admin'
+  }
+);
+
+console.log(data);`,
+                react: `// Register a new CampCart user (React Hook)
+import { useState } from 'react';
+
+export function useSignup() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const signup = async (fullName, email, password, role) => {
+    setLoading(true);
+    try {
+      const res = await fetch('${BASE_URL}/api/v1/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullName, email, password, role }),
+      });
+      return await res.json();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { signup, loading, error };
+}`
+            },
+            login: {
+                fetch: `// Login to CampCart
+const response = await fetch('${BASE_URL}/api/v1/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  credentials: 'include', // Required for cookies
+  body: JSON.stringify({
+    email: 'john@example.com',
+    password: 'securePass123!'
+  })
+});
+
+const data = await response.json();
+// 'accessToken' & 'refreshToken' cookies
+// are now set automatically by the server.
+console.log(data.userRole);`,
+                axios: `// Login to CampCart
+import axios from 'axios';
+
+const { data } = await axios.post(
+  '${BASE_URL}/api/v1/login',
+  {
+    email: 'john@example.com',
+    password: 'securePass123!'
+  },
+  { withCredentials: true } // Required for cookies
+);
+
+// Cookies set automatically by browser.
+console.log(data.userRole);`,
+                react: `// Login Hook (React)
+import { useState } from 'react';
+
+export function useLogin() {
+  const [loading, setLoading] = useState(false);
+
+  const login = async (email, password) => {
+    setLoading(true);
+    const res = await fetch('${BASE_URL}/api/v1/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email, password }),
+    });
+    setLoading(false);
+    return await res.json();
+  };
+
+  return { login, loading };
+}`
+            },
+            me: {
+                fetch: `// Get currently logged-in user
+// Requires login cookie to be present
+const response = await fetch(
+  '${BASE_URL}/api/v1/auth/me',
+  {
+    method: 'GET',
+    credentials: 'include', // Send auth cookie
+  }
+);
+
+const data = await response.json();
+console.log(data.info); // User object (no password)`,
+                axios: `// Get currently logged-in user
+import axios from 'axios';
+
+const { data } = await axios.get(
+  '${BASE_URL}/api/v1/auth/me',
+  { withCredentials: true } // Send auth cookie
+);
+
+console.log(data.info); // User object`,
+                react: `// useCurrentUser Hook (React)
+import { useEffect, useState } from 'react';
+
+export function useCurrentUser() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('${BASE_URL}/api/v1/auth/me', {
+      credentials: 'include',
+    })
+      .then(r => r.json())
+      .then(data => setUser(data.info))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { user, loading };
+}`
+            },
+            'update-profile': {
+                fetch: `// Update user profile details
+const response = await fetch(
+  '${BASE_URL}/api/v1/users/profile',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include', // Send auth cookie
+    body: JSON.stringify({
+      phoneNumber: '+1234567890',
+      address: '123 Vendor Street, Lagos',
+    })
+  }
+);
+
+const data = await response.json();
+console.log(data.info); // Updated user`,
+                axios: `// Update user profile details
+import axios from 'axios';
+
+const { data } = await axios.post(
+  '${BASE_URL}/api/v1/users/profile',
+  {
+    phoneNumber: '+1234567890',
+    address: '123 Vendor Street, Lagos',
+  },
+  { withCredentials: true }
+);
+
+console.log(data.info);`,
+                react: `// useUpdateProfile Hook (React)
+import { useState } from 'react';
+
+export function useUpdateProfile() {
+  const [loading, setLoading] = useState(false);
+
+  const updateProfile = async (profileData) => {
+    setLoading(true);
+    const res = await fetch(
+      '${BASE_URL}/api/v1/users/profile',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(profileData),
+      }
+    );
+    setLoading(false);
+    return await res.json();
+  };
+
+  return { updateProfile, loading };
+}`
+            },
+            'create-product': {
+                fetch: `// Create a product (Vendor only)
+const response = await fetch(
+  '${BASE_URL}/api/v1/vendor/products',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include', // Vendor auth cookie
+    body: JSON.stringify({
+      name: 'Camping Tent',
+      description: 'Durable 4-person tent.',
+      price: 129.99,
+      category: '64f8b2d1c...', // Category ObjectId
+      images: ['https://example.com/tent.jpg'],
+      stock: 50
+    })
+  }
+);
+
+const data = await response.json();
+console.log(data.product);`,
+                axios: `// Create a product (Vendor only)
+import axios from 'axios';
+
+const { data } = await axios.post(
+  '${BASE_URL}/api/v1/vendor/products',
+  {
+    name: 'Camping Tent',
+    description: 'Durable 4-person tent.',
+    price: 129.99,
+    category: '64f8b2d1c...', // Category ObjectId
+    images: ['https://example.com/tent.jpg'],
+    stock: 50
+  },
+  { withCredentials: true }
+);
+
+console.log(data.product);`,
+                react: `// useCreateProduct Hook (React - Vendor)
+import { useState } from 'react';
+
+export function useCreateProduct() {
+  const [loading, setLoading] = useState(false);
+
+  const createProduct = async (productData) => {
+    setLoading(true);
+    const res = await fetch(
+      '${BASE_URL}/api/v1/vendor/products',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(productData),
+      }
+    );
+    setLoading(false);
+    return await res.json();
+  };
+
+  return { createProduct, loading };
+}`
+            }
+        };
+
+        // ============================
+        //  SANDBOX FUNCTIONS
+        // ============================
+        function updateSandboxCode() {
+            const select = document.getElementById('sandbox-endpoint-select');
+            currentEndpoint = select.value;
+            renderSandboxCode();
+        }
+
+        function switchSandboxTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.sandbox-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + tab).classList.add('active');
+            renderSandboxCode();
+        }
+
+        function renderSandboxCode() {
+            const pre = document.getElementById('sandbox-code-output');
+            const snippet = sandboxSnippets[currentEndpoint]?.[currentTab] || '// No snippet available.';
+            pre.textContent = snippet;
+        }
+
+        function copySandboxCode() {
+            const snippet = sandboxSnippets[currentEndpoint]?.[currentTab] || '';
+            navigator.clipboard.writeText(snippet).then(() => {
+                showToast('Code snippet copied!');
+            });
+        }
+
+        // ============================
+        //  ENDPOINT CARD FUNCTIONS
+        // ============================
+        function toggleCard(headerElement) {
+            const card = headerElement.closest('.endpoint-card');
+            card.classList.toggle('open');
+        }
+
+        function copyEndpoint(event, endpoint) {
+            event.stopPropagation();
+            navigator.clipboard.writeText(BASE_URL + endpoint);
+            showToast('Endpoint URL copied!');
+        }
+
+        function copyText(text, msg) {
+            navigator.clipboard.writeText(text);
+            showToast(msg);
+        }
+
+        function copyJsonSnippet(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text);
+            showToast('JSON copied!');
+        }
+
+        // ============================
+        //  NAVIGATION
+        // ============================
+        function setActiveLink(clickedLink) {
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            clickedLink.classList.add('active');
+        }
+
+        function toggleMobileSidebar() {
+            document.querySelector('.sidebar-pane').classList.toggle('mobile-open');
+            document.getElementById('backdrop').classList.toggle('show');
+        }
+
+        function toggleMobileSandbox() {
+            document.getElementById('sandbox-pane').classList.toggle('mobile-open');
+            document.getElementById('backdrop').classList.toggle('show');
+        }
+
+        function closeMobilePanes() {
+            document.querySelector('.sidebar-pane').classList.remove('mobile-open');
+            document.getElementById('sandbox-pane').classList.remove('mobile-open');
+            document.getElementById('backdrop').classList.remove('show');
+        }
+
+        // ============================
+        //  TOAST NOTIFICATION
+        // ============================
+        function showToast(message) {
+            const toast = document.getElementById('toast-alert');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2800);
+        }
+
+        // ============================
+        //  INIT
+        // ============================
+        renderSandboxCode();
+    </script>
+</body>
+</html>

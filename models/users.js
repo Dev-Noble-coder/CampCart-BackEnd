@@ -15,11 +15,28 @@ const userSchema = new mongoose.Schema({
     },
     role : {
         type : String,
-        enum : ["user","admin","agent","deliveryAgent",],
+        enum : ["user","vendor","admin","agent","deliveryAgent"],
         default: "user",
         required: true 
+    },
+    phoneNumber: {
+        type: String,
+        required: false
+    },
+    address: {
+        type: String,
+        required: false
+    },
+    businessName: {
+        type: String,
+        required: false // Only for vendors
+    },
+    status: {
+        type: String,
+        enum: ["active", "suspended", "pending"],
+        default: "active"
     }
-});
+}, { timestamps: true });
 
 const User = mongoose.model("users", userSchema);
 export default User;
