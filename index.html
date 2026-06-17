@@ -1210,12 +1210,28 @@
         
             <div class="nav-section">
                 <div class="nav-section-title">Vendor Services</div>
+                <a href="#route-vendor-me" class="nav-link" onclick="setActiveLink(this)">
+                    GET /api/v1/vendor/vendor-auth/me
+                    <span class="badge get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6;">GET</span>
+                </a>
                 <a href="#route-create-product" class="nav-link" onclick="setActiveLink(this)">
                     POST /api/v1/vendor/products
                     <span class="badge post">POST</span>
                 </a>
                 <a href="#route-get-product" class="nav-link" onclick="setActiveLink(this)">
                     GET /api/v1/vendor/products
+                    <span class="badge get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6;">GET</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Agent Services</div>
+                <a href="#route-agent-signup" class="nav-link" onclick="setActiveLink(this)">
+                    POST /api/v1/agent/signup
+                    <span class="badge post">POST</span>
+                </a>
+                <a href="#route-agent-me" class="nav-link" onclick="setActiveLink(this)">
+                    GET /api/v1/agent/agent-auth/me
                     <span class="badge get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6;">GET</span>
                 </a>
             </div>
@@ -1643,6 +1659,33 @@
                 Vendor Services
             </div>
 
+            <!-- Vendor Auth Me Endpoint -->
+            <div class="endpoint-card" id="route-vendor-me">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">GET</span>
+                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">VENDOR</span>
+                    <span class="endpoint-path">/api/v1/vendor/vendor-auth/me</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/vendor/vendor-auth/me')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Get current vendor info</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Retrieves the verified vendor data for the active session.</p>
+                    <div class="detail-title">Required Request Configuration</div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-comment">// Client must send cookies</span>
+<span class="json-key">"credentials"</span>: <span class="json-string">"include"</span></pre>
+                    </div>
+                </div>
+            </div>
+
             <!-- Create Product Endpoint -->
             <div class="endpoint-card" id="route-create-product">
                 <div class="endpoint-header" onclick="toggleCard(this)">
@@ -1828,6 +1871,103 @@
                 </div>
             </div>
 
+            <!-- AGENT SERVICES SECTION -->
+            <div class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    style="color: var(--primary-light)">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                Agent Services
+            </div>
+
+            <!-- Agent Signup Endpoint -->
+            <div class="endpoint-card" id="route-agent-signup">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method post">POST</span>
+                    <span class="endpoint-path">/api/v1/agent/signup</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/agent/signup')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Create agent account</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Registers a new agent account. The role is automatically set to "agent".</p>
+                    <div class="detail-title">Request Body Fields</div>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Requirement</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="param-name">email</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>A valid email address for account credentials.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">password</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>A secure password.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">fullName</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>The full name of the agent.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="detail-title">Request Payload Example</div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"email"</span>: <span class="json-string">"agent1@example.com"</span>,
+<span class="json-key">"password"</span>: <span class="json-string">"securePass123!"</span>,
+<span class="json-key">"fullName"</span>: <span class="json-string">"Agent Smith"</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Auth Me Endpoint -->
+            <div class="endpoint-card" id="route-agent-me">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">GET</span>
+                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                    <span class="endpoint-path">/api/v1/agent/agent-auth/me</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/agent/agent-auth/me')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Get current agent info</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Retrieves the verified agent data for the active session.</p>
+                    <div class="detail-title">Required Request Configuration</div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-comment">// Client must send cookies</span>
+<span class="json-key">"credentials"</span>: <span class="json-string">"include"</span></pre>
+                    </div>
+                </div>
+            </div>
+
         </main>
 
         <!-- Right Integration Sandbox Pane -->
@@ -1849,8 +1989,11 @@
                         <option value="login">POST /login — Login</option>
                         <option value="me">GET /auth/me — Get Current User</option>
                         <option value="update-profile">POST /users/profile — Update Profile</option>
+                        <option value="vendor-me">GET /vendor/vendor-auth/me — Get Current Vendor</option>
                         <option value="create-product">POST /vendor/products — Create Product</option>
                         <option value="get-product">GET /vendor/products — Get Vendor Products</option>
+                        <option value="agent-signup">POST /agent/signup — Create Agent Account</option>
+                        <option value="agent-me">GET /agent/agent-auth/me — Get Current Agent</option>
                     </select>
                 </div>
 
@@ -2113,6 +2256,45 @@ export function useUpdateProfile() {
   };
 
   return { updateProfile, loading };
+} `,
+            'vendor-me': {
+                fetch: `// Get currently logged-in vendor
+const response = await fetch(
+  '${BASE_URL}/api/v1/vendor/vendor-auth/me',
+  {
+    method: 'GET',
+    credentials: 'include', // Send vendor auth cookie
+  }
+);
+
+const data = await response.json();
+console.log(data.info);`,
+                axios: `// Get currently logged-in vendor
+import axios from 'axios';
+
+const { data } = await axios.get(
+  '${BASE_URL}/api/v1/vendor/vendor-auth/me',
+  { withCredentials: true } // Send vendor auth cookie
+);
+
+console.log(data.info);`,
+                react: `// useCurrentVendor Hook (React)
+import { useEffect, useState } from 'react';
+
+export function useCurrentVendor() {
+  const [vendor, setVendor] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('${BASE_URL}/api/v1/vendor/vendor-auth/me', {
+      credentials: 'include',
+    })
+      .then(r => r.json())
+      .then(data => setVendor(data.info))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { vendor, loading };
 }`
             },
             'create-product': {
@@ -2218,6 +2400,101 @@ export function useGetVendorProducts(page = 1, limit = 10) {
   }, [page, limit]);
 
   return { data, loading };
+} `
+            },
+            'agent-signup': {
+                fetch: `// Register a new CampCart agent
+const response = await fetch('\${BASE_URL}/api/v1/agent/signup', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    fullName: 'Agent Smith',
+    email: 'agent1@example.com',
+    password: 'securePass123!'
+  })
+});
+
+const data = await response.json();
+console.log(data);`,
+                axios: `// Register a new CampCart agent
+import axios from 'axios';
+
+const { data } = await axios.post(
+  '\${BASE_URL}/api/v1/agent/signup',
+  {
+    fullName: 'Agent Smith',
+    email: 'agent1@example.com',
+    password: 'securePass123!'
+  }
+);
+
+console.log(data);`,
+                react: `// Register a new CampCart agent (React Hook)
+import { useState } from 'react';
+
+export function useAgentSignup() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const signup = async (fullName, email, password) => {
+    setLoading(true);
+    try {
+      const res = await fetch('\${BASE_URL}/api/v1/agent/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullName, email, password }),
+      });
+      return await res.json();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { signup, loading, error };
+}`
+            },
+            'agent-me': {
+                fetch: `// Get currently logged-in agent
+const response = await fetch(
+  '\${BASE_URL}/api/v1/agent/agent-auth/me',
+  {
+    method: 'GET',
+    credentials: 'include', // Send auth cookie
+  }
+);
+
+const data = await response.json();
+console.log(data.info);`,
+                axios: `// Get currently logged-in agent
+import axios from 'axios';
+
+const { data } = await axios.get(
+  '\${BASE_URL}/api/v1/agent/agent-auth/me',
+  { withCredentials: true } // Send auth cookie
+);
+
+console.log(data.info);`,
+                react: `// useCurrentAgent Hook (React)
+import { useEffect, useState } from 'react';
+
+export function useCurrentAgent() {
+  const [agent, setAgent] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('\${BASE_URL}/api/v1/agent/agent-auth/me', {
+      credentials: 'include',
+    })
+      .then(r => r.json())
+      .then(data => setAgent(data.info))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { agent, loading };
 }`
             }
         };

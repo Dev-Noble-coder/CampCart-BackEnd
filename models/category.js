@@ -7,7 +7,7 @@ const categorySchema = new mongoose.Schema({
         unique: true
     },
     icon: {
-        type: String, // URL to image/icon
+        type: String, 
         default: ""
     },
     description: {
