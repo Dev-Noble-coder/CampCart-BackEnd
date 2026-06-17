@@ -55,3 +55,40 @@ export const createProduct = async (req, res) => {
         });
     }
 };
+export const getProduct = async (req,res) => {
+    try {
+        const userid = req.accessToken.userID || req.accessToken.id;
+
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        const fetchuserProduct = await Product.find({ vendor: userid })
+            .skip(skip)
+            .limit(limit);
+            
+        const total = await Product.countDocuments({ vendor: userid });
+
+        if(!fetchuserProduct){
+            return res.status(400).json({
+                message : "an error occured "
+            })
+        }
+        res.status(200).json({
+            message : "product pulled",
+            products  : fetchuserProduct,
+            currentPage: page,
+            totalPages: Math.ceil(total / limit),
+            totalProducts: total
+        })
+
+
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "An error occurred while fetching the products",
+            error: error.message
+        });
+    }
+}

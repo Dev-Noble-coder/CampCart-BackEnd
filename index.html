@@ -1214,6 +1214,10 @@
                     POST /api/v1/vendor/products
                     <span class="badge post">POST</span>
                 </a>
+                <a href="#route-get-product" class="nav-link" onclick="setActiveLink(this)">
+                    GET /api/v1/vendor/products
+                    <span class="badge get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6;">GET</span>
+                </a>
             </div>
         </aside>
 
@@ -1749,6 +1753,81 @@
                 </div>
             </div>
 
+            <!-- Get Vendor Products Endpoint -->
+            <div class="endpoint-card" id="route-get-product">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">GET</span>
+                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">VENDOR</span>
+                    <span class="endpoint-path">/api/v1/vendor/products</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/vendor/products')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Get vendor products (Paginated)</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Retrieves a paginated list of products created by the authenticated vendor.</p>
+
+                    <div class="detail-title">Required Request Configuration</div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-comment">// Client must send cookies</span>
+<span class="json-key">"credentials"</span>: <span class="json-string">"include"</span></pre>
+                    </div>
+
+                    <div class="detail-title">Query Parameters</div>
+                    <table class="params-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Requirement</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="param-name">page</td>
+                                <td class="param-type">number</td>
+                                <td class="param-req optional">Optional</td>
+                                <td>Page number to retrieve (default: 1).</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">limit</td>
+                                <td class="param-type">number</td>
+                                <td class="param-req optional">Optional</td>
+                                <td>Number of items per page (default: 10).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="detail-title">Request Example</div>
+                    <div class="code-container">
+                        <pre class="code-block">GET /api/v1/vendor/products?page=1&amp;limit=10</pre>
+                    </div>
+
+                    <div class="detail-title">Success Response Example <span class="response-status-badge status-success">200 OK</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"product pulled"</span>,
+<span class="json-key">"products"</span>: [
+  {
+    <span class="json-key">"_id"</span>: <span class="json-string">"64f9c3d2e..."</span>,
+    <span class="json-key">"name"</span>: <span class="json-string">"Camping Tent"</span>,
+    <span class="json-key">"price"</span>: <span class="json-string">129.99</span>,
+    <span class="json-key">"vendor"</span>: <span class="json-string">"64f8a2c1b..."</span>
+  }
+],
+<span class="json-key">"currentPage"</span>: <span class="json-number">1</span>,
+<span class="json-key">"totalPages"</span>: <span class="json-number">5</span>,
+<span class="json-key">"totalProducts"</span>: <span class="json-number">48</span></pre>
+                    </div>
+                </div>
+            </div>
+
         </main>
 
         <!-- Right Integration Sandbox Pane -->
@@ -1771,6 +1850,7 @@
                         <option value="me">GET /auth/me — Get Current User</option>
                         <option value="update-profile">POST /users/profile — Update Profile</option>
                         <option value="create-product">POST /vendor/products — Create Product</option>
+                        <option value="get-product">GET /vendor/products — Get Vendor Products</option>
                     </select>
                 </div>
 
@@ -2097,6 +2177,47 @@ export function useCreateProduct() {
   };
 
   return { createProduct, loading };
+}`
+            },
+            'get-product': {
+                fetch: `// Get Vendor Products (Paginated)
+const response = await fetch(
+  '\${BASE_URL}/api/v1/vendor/products?page=1&limit=10',
+  {
+    method: 'GET',
+    credentials: 'include', // Vendor auth cookie
+  }
+);
+
+const data = await response.json();
+console.log(data);`,
+                axios: `// Get Vendor Products (Paginated)
+import axios from 'axios';
+
+const { data } = await axios.get(
+  '\${BASE_URL}/api/v1/vendor/products?page=1&limit=10',
+  { withCredentials: true }
+);
+
+console.log(data);`,
+                react: `// useGetVendorProducts Hook (React)
+import { useState, useEffect } from 'react';
+
+export function useGetVendorProducts(page = 1, limit = 10) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(\`\${BASE_URL}/api/v1/vendor/products?page=\${page}&limit=\${limit}\`, {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(setData)
+      .finally(() => setLoading(false));
+  }, [page, limit]);
+
+  return { data, loading };
 }`
             }
         };

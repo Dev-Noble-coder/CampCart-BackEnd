@@ -9,6 +9,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    deliverfee: {
+        type: Number,
+        required: true
+    },
     price: {
         type: Number,
         required: true
@@ -24,7 +28,7 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     images: [{
-        type: String // URLs to images
+        type: String
     }],
     is_flash_sale: {
         type: Boolean,
