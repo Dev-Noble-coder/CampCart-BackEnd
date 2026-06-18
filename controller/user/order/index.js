@@ -19,16 +19,18 @@ export const createOrder = async (req, res) => {
         let totalAmount = 0;
         const orderItems = [];
         let orderVendorId = null;
+        const stockUpdates = [];
 
         // Validate products and calculate total amount from DB prices
         for (const item of items) {
+            const quantity = parseInt(item.quantity) || 1;
             const product = await Product.findById(item.product);
             
             if (!product) {
                 return res.status(404).json({ message: `Product with ID ${item.product} not found.` });
             }
 
-            if (product.stock < item.quantity) {
+            if (product.stock < quantity) {
                 return res.status(400).json({ message: `Insufficient stock for product ${product.name}. Available: ${product.stock}` });
             }
 
@@ -37,17 +39,16 @@ export const createOrder = async (req, res) => {
             }
 
             const itemPrice = product.price;
-            totalAmount += itemPrice * item.quantity;
+            totalAmount += itemPrice * quantity;
 
             orderItems.push({
                 product: product._id,
-                quantity: item.quantity,
+                quantity: quantity,
                 price: itemPrice
             });
 
-            // Optionally, deduct stock here (can also be done after payment confirmation)
-            product.stock -= item.quantity;
-            await product.save();
+            // Queue stock deduction to run only after order successfully saves
+            stockUpdates.push({ productId: product._id, quantity });
         }
 
         const newOrder = new Order({
@@ -62,6 +63,11 @@ export const createOrder = async (req, res) => {
         });
 
         const savedOrder = await newOrder.save();
+
+        // Safely deduct stock now that order is confirmed saved
+        for (const update of stockUpdates) {
+            await Product.findByIdAndUpdate(update.productId, { $inc: { stock: -update.quantity } });
+        }
 
         // Send order confirmation email asynchronously
         const user = await User.findById(userid);
