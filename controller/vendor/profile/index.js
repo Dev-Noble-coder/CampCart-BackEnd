@@ -5,11 +5,14 @@ import Order from "../../../models/order.js";
 export const updateVendorProfile = async (req, res) => {
     try {
         const userid = req.user?._id || req.accessToken?.userID || req.accessToken?.id;
-        const { businessName, address, phoneNumber } = req.body;
+        const { businessName, address, phoneNumber, businessHours } = req.body;
+
+        const updateData = { businessName, address, phoneNumber };
+        if (businessHours) updateData.businessHours = businessHours;
 
         const updatedUser = await User.findByIdAndUpdate(
             userid,
-            { $set: { businessName, address, phoneNumber } },
+            { $set: updateData },
             { new: true, runValidators: true }
         ).select("-password");
 

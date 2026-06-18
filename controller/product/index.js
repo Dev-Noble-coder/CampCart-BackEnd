@@ -1,6 +1,7 @@
 import express from "express";
 import Product from "../../models/product.js";
 import Category from "../../models/category.js";
+import User from "../../models/users.js";
 
 const router = express.Router();
 
@@ -8,7 +9,31 @@ export const getProducts = async (req, res) => {
     try {
         const { search, category, is_flash_sale, is_recommended, page = 1, limit = 10 } = req.query;
 
-        let query = {};
+        const now = new Date();
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const currentDay = days[now.getDay()];
+        const currentHour = String(now.getHours()).padStart(2, '0');
+        const currentMinute = String(now.getMinutes()).padStart(2, '0');
+        const currentTime = `${currentHour}:${currentMinute}`;
+
+        const vendors = await User.find({ role: "vendor" }).select('_id businessHours');
+        const openVendorIds = vendors.filter(vendor => {
+            if (!vendor.businessHours || !vendor.businessHours[currentDay]) return true; 
+            
+            const hours = vendor.businessHours[currentDay];
+            if (!hours.isOpen) return false;
+            
+            const openTime = hours.openTime || "00:00";
+            const closeTime = hours.closeTime || "23:59";
+            
+            if (openTime <= closeTime) {
+                return currentTime >= openTime && currentTime <= closeTime;
+            } else {
+                return currentTime >= openTime || currentTime <= closeTime;
+            }
+        }).map(v => v._id);
+
+        let query = { vendor: { $in: openVendorIds } };
 
         if (search) {
             query.name = { $regex: search, $options: "i" };
