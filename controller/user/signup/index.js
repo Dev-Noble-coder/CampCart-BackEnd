@@ -3,11 +3,11 @@ import bcrypt from "bcrypt";
 
 export const signup = async (req, res) => {
     try {
-        const { email, fullName, password , role} = req.body;
+        const { email, fullName, password } = req.body;
 
-        if (!email || !fullName || !password || !role) {
+        if (!email || !fullName || !password) {
             return res.status(400).json({
-                message: "Email, full name,password or role not provided"
+                message: "Email, full name or password not provided"
             });
         }
 
@@ -25,7 +25,7 @@ export const signup = async (req, res) => {
             fullName,
             email,
             password: encryptPassword,
-            role :role
+            role: "user"
         });
 
         if (!saveNewInfo) {
@@ -36,7 +36,7 @@ export const signup = async (req, res) => {
 
         res.status(201).json({
             message: "Account created successfully",
-            role:role,
+            role: "user",
         });
     } catch (error) {
         console.log(error);

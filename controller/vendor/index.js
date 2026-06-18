@@ -2,12 +2,12 @@ import express from "express";
 import authorization, { checkRole } from "../../middleware/middleware.js";
 import { createProduct, getCatigory, getProduct, getProductById, updateProduct, deleteProduct } from "./product/index.js";
 import { getVendorOrders, getOrderById as getVendorOrderById, updateOrderStatus } from "./order/index.js";
-import { signup } from "./signup/index.js";
+
 import { userinfo } from "./vendorinfo/index.js";
 import { updateVendorProfile, getVendorDashboardStats } from "./profile/index.js";
 
 const router = express.Router();
-router.post("/signup", signup);
+
 router.get("/auth/me", authorization, userinfo);
 router.get('/getCatigotries',authorization,getCatigory)
 router.post("/products", authorization, checkRole(["vendor"]), createProduct);

@@ -7,6 +7,7 @@ import { userinfo } from "./userinfo/index.js";
 import { forgotPassword, resetPassword } from "./password/index.js";
 import { createOrder, getUserOrders, getOrderById } from "./order/index.js";
 import { getWishlist, addToWishlist, removeFromWishlist } from "./wishlist/index.js";
+import { becomeVendor } from "./becomeVendor/index.js";
 
 const router = express.Router();
 
@@ -17,6 +18,7 @@ router.post("/auth/forgot-password", forgotPassword);
 router.post("/auth/reset-password/:token", resetPassword);
 router.get("/auth/me", authorization, userinfo);
 router.post("/users/profile", authorization, updateProfile);
+router.post("/users/become-vendor", authorization, becomeVendor);
 
 router.post("/orders", authorization, createOrder);
 router.get("/orders", authorization, getUserOrders);
