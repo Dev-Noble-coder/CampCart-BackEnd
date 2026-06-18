@@ -6,13 +6,8 @@ export const createProduct = async (req, res) => {
     try {
         const userid = req.accessToken.userID || req.accessToken.id;
         
-        // 1. Verify the user is a vendor
-        const user = await User.findById(userid);
-        if (!user || user.role !== "vendor") {
-            return res.status(403).json({
-                message: "Access denied. Only vendors can create products."
-            });
-        }
+        // User validation is now handled by the checkRole middleware.
+        // req.user contains the populated user object if needed.
         const {
             name,
             description,
@@ -114,9 +109,85 @@ export const getCatigory = async (req,res) => {
     catch (error) {
         console.log(error);
         res.status(500).json({
-            message: "An error occurred while fetching the products",
+            message: "An error occurred while fetching the categories",
             error: error.message
         });
     }
+};
 
-}
+export const getProductById = async (req, res) => {
+    try {
+        const userid = req.accessToken.userID || req.accessToken.id;
+        const { id } = req.params;
+
+        const product = await Product.findOne({ _id: id, vendor: userid }).populate("category", "name");
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found or access denied." });
+        }
+
+        res.status(200).json({
+            message: "Product fetched successfully",
+            product
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "An error occurred while fetching the product",
+            error: error.message
+        });
+    }
+};
+
+export const updateProduct = async (req, res) => {
+    try {
+        const userid = req.accessToken.userID || req.accessToken.id;
+        const { id } = req.params;
+        const updates = req.body;
+
+        const product = await Product.findOneAndUpdate(
+            { _id: id, vendor: userid },
+            { $set: updates },
+            { new: true, runValidators: true }
+        );
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found or access denied." });
+        }
+
+        res.status(200).json({
+            message: "Product updated successfully",
+            product
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "An error occurred while updating the product",
+            error: error.message
+        });
+    }
+};
+
+export const deleteProduct = async (req, res) => {
+    try {
+        const userid = req.accessToken.userID || req.accessToken.id;
+        const { id } = req.params;
+
+        const product = await Product.findOneAndDelete({ _id: id, vendor: userid });
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found or access denied." });
+        }
+
+        res.status(200).json({
+            message: "Product deleted successfully",
+            product
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "An error occurred while deleting the product",
+            error: error.message
+        });
+    }
+};

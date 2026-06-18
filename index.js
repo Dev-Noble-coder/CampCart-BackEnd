@@ -6,6 +6,8 @@ import userRoutes from "./controller/user/index.js";
 import vendorRoutes from "./controller/vendor/index.js";
 import agentRoutes from "./controller/Agent/index.js";
 import adminRoutes from "./controller/admin/index.js";
+import productRoutes from "./controller/product/index.js";
+import reviewRoutes from "./controller/review/index.js";
 import path from "path";
 import cookieParser from "cookie-parser";
 
@@ -31,6 +33,8 @@ app.use("/api/v1", userRoutes);
 app.use("/api/v1/vendor", vendorRoutes);
 app.use("/api/v1/agent", agentRoutes);
 app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1", productRoutes);
+app.use("/api/v1/reviews", reviewRoutes);
 
 const PORT = process.env.PORT || 5001;
 
