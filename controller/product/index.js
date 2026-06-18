@@ -39,7 +39,11 @@ export const getProducts = async (req, res) => {
             query.name = { $regex: search, $options: "i" };
         }
         if (category) {
-            query.category = category;
+            if (Array.isArray(category)) {
+                query.category = { $in: category };
+            } else {
+                query.category = category;
+            }
         }
         if (is_flash_sale) {
             query.is_flash_sale = is_flash_sale === "true";

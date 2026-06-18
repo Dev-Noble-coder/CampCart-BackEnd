@@ -59,12 +59,26 @@ export const getProduct = async (req,res) => {
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
 
-        const fetchuserProduct = await Product.find({ vendor: userid })
+        const { search, category } = req.query;
+        let query = { vendor: userid };
+
+        if (search) {
+            query.name = { $regex: search, $options: "i" };
+        }
+        if (category) {
+            if (Array.isArray(category)) {
+                query.category = { $in: category };
+            } else {
+                query.category = category;
+            }
+        }
+
+        const fetchuserProduct = await Product.find(query)
             .populate("category", "name description icon")
             .skip(skip)
             .limit(limit);
             
-        const total = await Product.countDocuments({ vendor: userid });
+        const total = await Product.countDocuments(query);
 
         if(!fetchuserProduct){
             return res.status(400).json({
