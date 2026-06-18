@@ -26,12 +26,10 @@ export const createOrder = async (req, res) => {
             return res.status(400).json({ message: "Delivery address is required for delivery orders." });
         }
 
-        let subTotal = 0;
-        const orderItems = [];
-        let orderVendorId = null;
         const stockUpdates = [];
+        const vendorGroups = {}; // { vendorId: { items: [], subTotal: 0 } }
 
-        // Validate products and calculate total amount from DB prices
+        // Validate products and group by vendor
         for (const item of items) {
             const quantity = parseInt(item.quantity) || 1;
             const product = await Product.findById(item.product);
@@ -44,10 +42,6 @@ export const createOrder = async (req, res) => {
                 return res.status(400).json({ message: `Insufficient stock for product ${product.name}. Available: ${product.stock}` });
             }
 
-            if (!orderVendorId) {
-                orderVendorId = product.vendor;
-            }
-
             let extrasTotal = 0;
             const extras = item.extras || [];
             extras.forEach(extra => {
@@ -55,9 +49,18 @@ export const createOrder = async (req, res) => {
             });
 
             const itemPrice = product.price;
-            subTotal += (itemPrice * quantity) + extrasTotal;
+            const itemSubTotal = (itemPrice * quantity) + extrasTotal;
 
-            orderItems.push({
+            const vendorId = product.vendor.toString();
+
+            if (!vendorGroups[vendorId]) {
+                vendorGroups[vendorId] = {
+                    items: [],
+                    subTotal: 0
+                };
+            }
+
+            vendorGroups[vendorId].items.push({
                 product: product._id,
                 quantity: quantity,
                 price: itemPrice,
@@ -66,44 +69,54 @@ export const createOrder = async (req, res) => {
                 extras: extras,
                 extrasTotal: extrasTotal
             });
+            vendorGroups[vendorId].subTotal += itemSubTotal;
 
-            // Queue stock deduction to run only after order successfully saves
+            // Queue stock deduction
             stockUpdates.push({ productId: product._id, quantity });
         }
 
-        const deliveryCharge = normalizedType === "Delivery" ? (Number(clientDeliveryCharge) || 500) : 0;
-        const total = subTotal + deliveryCharge;
+        const savedOrders = [];
+        let isFirstVendor = true;
+        let overallTotal = 0;
 
-        const newOrder = new Order({
-            user: userid,
-            vendor: orderVendorId,
-            items: orderItems,
-            subTotal,
-            deliveryCharge,
-            total,
-            type: normalizedType,
-            deliveryAddress: normalizedType === "Delivery" ? deliveryAddress : undefined,
-            paymentMethod,
-            status: "Pending",
-            paymentStatus: "Pending"
-        });
+        for (const [vendorId, group] of Object.entries(vendorGroups)) {
+            const vendorDeliveryCharge = isFirstVendor && normalizedType === "Delivery" ? (Number(clientDeliveryCharge) || 500) : 0;
+            const vendorTotal = group.subTotal + vendorDeliveryCharge;
+            overallTotal += vendorTotal;
 
-        const savedOrder = await newOrder.save();
+            const newOrder = new Order({
+                user: userid,
+                vendor: vendorId,
+                items: group.items,
+                subTotal: group.subTotal,
+                deliveryCharge: vendorDeliveryCharge,
+                total: vendorTotal,
+                type: normalizedType,
+                deliveryAddress: normalizedType === "Delivery" ? deliveryAddress : undefined,
+                paymentMethod,
+                status: "Pending",
+                paymentStatus: "Pending"
+            });
 
-        // Safely deduct stock now that order is confirmed saved
+            const savedOrder = await newOrder.save();
+            savedOrders.push(savedOrder);
+            isFirstVendor = false;
+        }
+
+        // Safely deduct stock now that orders are confirmed saved
         for (const update of stockUpdates) {
             await Product.findByIdAndUpdate(update.productId, { $inc: { stock: -update.quantity } });
         }
 
         // Send order confirmation email asynchronously
         const user = await User.findById(userid);
-        if (user && user.email) {
-            sendOrderConfirmationEmail(user.email, savedOrder._id, total);
+        if (user && user.email && savedOrders.length > 0) {
+            sendOrderConfirmationEmail(user.email, savedOrders[0]._id, overallTotal);
         }
 
         res.status(201).json({
-            message: "Order placed successfully",
-            order: savedOrder
+            message: "Orders placed successfully",
+            orders: savedOrders
         });
 
     } catch (error) {
