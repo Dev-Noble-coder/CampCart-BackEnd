@@ -43,9 +43,14 @@ const orderSchema = new mongoose.Schema({
         ref: "users",
         required: false // assigned delivery agent
     },
+    deliveryType: {
+        type: String,
+        enum: ["pickup", "delivery"],
+        required: true
+    },
     deliveryAddress: {
         type: String,
-        required: true
+        required: false
     },
     paymentMethod: {
         type: String,

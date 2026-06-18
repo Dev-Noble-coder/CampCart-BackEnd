@@ -3,8 +3,8 @@ import { sendOrderStatusEmail } from "../../../lib/email.js";
 
 export const getAvailableOrders = async (req, res) => {
     try {
-        // Find orders that are ready for pickup but not yet assigned to an agent
-        const orders = await Order.find({ status: "Ready for Pickup", agent: { $exists: false } })
+        // Find delivery orders that are ready for pickup but not yet assigned to an agent
+        const orders = await Order.find({ status: "Ready for Pickup", agent: { $exists: false }, deliveryType: "delivery" })
             .populate("user", "fullName email phoneNumber address")
             .populate("vendor", "businessName address")
             .sort({ createdAt: 1 }); // Oldest first
@@ -28,7 +28,7 @@ export const acceptOrder = async (req, res) => {
         const { id } = req.params;
 
         const order = await Order.findOneAndUpdate(
-            { _id: id, status: "Ready for Pickup", agent: { $exists: false } },
+            { _id: id, status: "Ready for Pickup", agent: { $exists: false }, deliveryType: "delivery" },
             { $set: { agent: agentid } },
             { new: true, runValidators: true }
         );

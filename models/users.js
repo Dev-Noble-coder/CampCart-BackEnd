@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false // Only for vendors
     },
+    storeDescription: {
+        type: String,
+        required: false // Only for vendors
+    },
     businessHours: {
         monday: { isOpen: { type: Boolean, default: true }, openTime: { type: String, default: "08:00" }, closeTime: { type: String, default: "20:00" } },
         tuesday: { isOpen: { type: Boolean, default: true }, openTime: { type: String, default: "08:00" }, closeTime: { type: String, default: "20:00" } },
@@ -54,6 +58,7 @@ userSchema.set('toJSON', {
         if (ret.role !== 'vendor') {
             delete ret.businessHours;
             delete ret.businessName;
+            delete ret.storeDescription;
         }
         return ret;
     }

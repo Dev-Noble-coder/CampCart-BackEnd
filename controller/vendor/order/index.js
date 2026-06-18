@@ -1,5 +1,6 @@
 import Order from "../../../models/order.js";
-import { sendOrderStatusEmail } from "../../../lib/email.js";
+import User from "../../../models/users.js";
+import { sendOrderStatusEmail, sendNewDeliveryAvailableEmail } from "../../../lib/email.js";
 
 export const getVendorOrders = async (req, res) => {
     try {
@@ -65,7 +66,7 @@ export const updateOrderStatus = async (req, res) => {
             { _id: id, vendor: userid },
             { $set: { status } },
             { new: true, runValidators: true }
-        ).populate("user", "email");
+        ).populate("user", "email").populate("vendor", "businessName");
 
         if (!order) {
             return res.status(404).json({ message: "Order not found or access denied." });
@@ -73,6 +74,15 @@ export const updateOrderStatus = async (req, res) => {
 
         if (order.user && order.user.email) {
             sendOrderStatusEmail(order.user.email, order._id, status);
+        }
+
+        if (status === "Ready for Pickup" && order.deliveryType === "delivery") {
+            const agents = await User.find({ role: "deliveryAgent" }).select("email");
+            const agentEmails = agents.map(agent => agent.email);
+            if (agentEmails.length > 0) {
+                const vendorName = order.vendor ? order.vendor.businessName : "CampCart Vendor";
+                sendNewDeliveryAvailableEmail(agentEmails, order._id, vendorName);
+            }
         }
 
         res.status(200).json({

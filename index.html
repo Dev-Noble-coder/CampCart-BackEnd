@@ -1333,6 +1333,10 @@
                 <a href="#route-admin-category-get" class="nav-link" onclick="setActiveLink(this)">
                     GET /api/v1/admin/category
                     <span class="badge get">GET</span>
+                </a>
+                <a href="#route-admin-agents-orders" class="nav-link" onclick="setActiveLink(this)">
+                    GET /api/v1/admin/agents/:id/orders
+                    <span class="badge get">GET</span>
                 </a></div>
             <div class="nav-section">
                 <div class="nav-section-title">Product Services</div>
@@ -2209,6 +2213,12 @@
                             <td class="param-type">object</td>
                             <td class="param-req optional">Optional</td>
                             <td>Operating hours for all 7 days</td>
+                        </tr>
+                        <tr>
+                            <td class="param-name">storeDescription</td>
+                            <td class="param-type">string</td>
+                            <td class="param-req optional">Optional</td>
+                            <td>Detailed description of the store</td>
                         </tr></tbody></table>
                     
                 <div class="detail-title">Request Payload Example</div>
@@ -2217,6 +2227,7 @@
   "businessName": "New Name",
   "address": "123 Main St",
   "phoneNumber": "+1234567890",
+  "storeDescription": "We sell the best goods in town!",
   "businessHours": {
     "monday": { "isOpen": true, "openTime": "08:00", "closeTime": "20:00" },
     "sunday": { "isOpen": false, "openTime": "00:00", "closeTime": "00:00" }
@@ -2534,6 +2545,38 @@
                     <div class="code-container">
                         <pre class="code-block">{
   "categories": []
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint-card" id="route-admin-agents-orders">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method get">GET</span>
+                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                    <span class="endpoint-path">/api/v1/admin/agents/:agentId/orders</span>
+                    <span class="endpoint-short-desc">Get agent orders</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Retrieves all orders assigned to a specific delivery agent.</p>
+                    
+                    <div class="detail-title">Success Response Example</div>
+                    <div class="code-container">
+                        <pre class="code-block">{
+  "message": "Agent orders fetched successfully",
+  "agent": {
+    "fullName": "John Doe",
+    "email": "agent@example.com",
+    "phoneNumber": "123456789"
+  },
+  "orders": [
+    {
+      "_id": "60d...",
+      "status": "Picked Up",
+      "deliveryType": "delivery"
+    }
+  ]
 }</pre>
                     </div>
                 </div>

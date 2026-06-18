@@ -6,14 +6,22 @@ import { sendOrderConfirmationEmail } from "../../../lib/email.js";
 export const createOrder = async (req, res) => {
     try {
         const userid = req.accessToken.userID || req.accessToken.id;
-        const { items, deliveryAddress, paymentMethod } = req.body;
+        const { items, deliveryAddress, paymentMethod, deliveryType } = req.body;
 
         if (!items || items.length === 0) {
             return res.status(400).json({ message: "Order items cannot be empty." });
         }
 
-        if (!deliveryAddress || !paymentMethod) {
-            return res.status(400).json({ message: "Delivery address and payment method are required." });
+        if (!paymentMethod) {
+            return res.status(400).json({ message: "Payment method is required." });
+        }
+
+        if (!deliveryType || !["pickup", "delivery"].includes(deliveryType)) {
+            return res.status(400).json({ message: "Invalid or missing deliveryType. Must be 'pickup' or 'delivery'." });
+        }
+
+        if (deliveryType === "delivery" && !deliveryAddress) {
+            return res.status(400).json({ message: "Delivery address is required for delivery orders." });
         }
 
         let totalAmount = 0;
@@ -56,7 +64,8 @@ export const createOrder = async (req, res) => {
             vendor: orderVendorId,
             items: orderItems,
             totalAmount,
-            deliveryAddress,
+            deliveryType,
+            deliveryAddress: deliveryType === "delivery" ? deliveryAddress : undefined,
             paymentMethod,
             status: "Pending",
             paymentStatus: "Pending"

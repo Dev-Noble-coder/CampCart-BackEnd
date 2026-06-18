@@ -5,10 +5,11 @@ import Order from "../../../models/order.js";
 export const updateVendorProfile = async (req, res) => {
     try {
         const userid = req.user?._id || req.accessToken?.userID || req.accessToken?.id;
-        const { businessName, address, phoneNumber, businessHours } = req.body;
+        const { businessName, address, phoneNumber, businessHours, storeDescription } = req.body;
 
-        const updateData = { businessName, address, phoneNumber };
+        const updateData = { businessName, address, phoneNumber, };
         if (businessHours) updateData.businessHours = businessHours;
+        if (storeDescription !== undefined) updateData.storeDescription = storeDescription;
 
         const updatedUser = await User.findByIdAndUpdate(
             userid,
