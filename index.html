@@ -1738,17 +1738,31 @@
                             <td>Array of item objects</td>
                         </tr>
                         <tr>
-                            <td class="param-name">shippingAddress</td>
+                            <td class="param-name">deliveryType</td>
                             <td class="param-type">string</td>
                             <td class="param-req required">Required</td>
-                            <td>Address</td>
+                            <td>Either 'pickup' or 'delivery'</td>
+                        </tr>
+                        <tr>
+                            <td class="param-name">paymentMethod</td>
+                            <td class="param-type">string</td>
+                            <td class="param-req required">Required</td>
+                            <td>Payment method (e.g. 'Credit Card')</td>
+                        </tr>
+                        <tr>
+                            <td class="param-name">deliveryAddress</td>
+                            <td class="param-type">string</td>
+                            <td class="param-req optional">Optional</td>
+                            <td>Required if deliveryType is 'delivery'</td>
                         </tr></tbody></table>
                     
                 <div class="detail-title">Request Payload Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
   "items": [{ "product": "id", "quantity": 1 }],
-  "shippingAddress": "123 Main St"
+  "deliveryType": "delivery",
+  "paymentMethod": "Credit Card",
+  "deliveryAddress": "123 Main St"
 }</pre>
                 </div>
                     <div class="detail-title">Success Response Example</div>
