@@ -14,6 +14,23 @@ const orderItemSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true
+    },
+    vendor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+        required: false
+    },
+    type: {
+        type: String,
+        required: false
+    },
+    extras: [{
+        name: String,
+        price: Number
+    }],
+    extrasTotal: {
+        type: Number,
+        default: 0
     }
 });
 
@@ -24,7 +41,15 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     items: [orderItemSchema],
-    totalAmount: {
+    subTotal: {
+        type: Number,
+        required: true
+    },
+    deliveryCharge: {
+        type: Number,
+        default: 0
+    },
+    total: {
         type: Number,
         required: true
     },
@@ -43,9 +68,9 @@ const orderSchema = new mongoose.Schema({
         ref: "users",
         required: false // assigned delivery agent
     },
-    deliveryType: {
+    type: {
         type: String,
-        enum: ["pickup", "delivery"],
+        enum: ["pickup", "delivery", "Pickup", "Delivery"],
         required: true
     },
     deliveryAddress: {

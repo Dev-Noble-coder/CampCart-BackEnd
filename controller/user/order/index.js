@@ -6,7 +6,7 @@ import { sendOrderConfirmationEmail } from "../../../lib/email.js";
 export const createOrder = async (req, res) => {
     try {
         const userid = req.accessToken.userID || req.accessToken.id;
-        const { items, deliveryAddress, paymentMethod, deliveryType } = req.body;
+        const { items, deliveryAddress, paymentMethod, type, deliveryCharge: clientDeliveryCharge } = req.body;
 
         if (!items || items.length === 0) {
             return res.status(400).json({ message: "Order items cannot be empty." });
@@ -16,15 +16,17 @@ export const createOrder = async (req, res) => {
             return res.status(400).json({ message: "Payment method is required." });
         }
 
-        if (!deliveryType || !["pickup", "delivery"].includes(deliveryType)) {
-            return res.status(400).json({ message: "Invalid or missing deliveryType. Must be 'pickup' or 'delivery'." });
+        if (!type || !["pickup", "delivery", "Pickup", "Delivery"].includes(type)) {
+            return res.status(400).json({ message: "Invalid or missing type. Must be 'Pickup' or 'Delivery'." });
         }
 
-        if (deliveryType === "delivery" && !deliveryAddress) {
+        const normalizedType = type.toLowerCase() === "delivery" ? "Delivery" : "Pickup";
+
+        if (normalizedType === "Delivery" && !deliveryAddress) {
             return res.status(400).json({ message: "Delivery address is required for delivery orders." });
         }
 
-        let totalAmount = 0;
+        let subTotal = 0;
         const orderItems = [];
         let orderVendorId = null;
         const stockUpdates = [];
@@ -46,26 +48,41 @@ export const createOrder = async (req, res) => {
                 orderVendorId = product.vendor;
             }
 
+            let extrasTotal = 0;
+            const extras = item.extras || [];
+            extras.forEach(extra => {
+                extrasTotal += Number(extra.price) || 0;
+            });
+
             const itemPrice = product.price;
-            totalAmount += itemPrice * quantity;
+            subTotal += (itemPrice * quantity) + extrasTotal;
 
             orderItems.push({
                 product: product._id,
                 quantity: quantity,
-                price: itemPrice
+                price: itemPrice,
+                vendor: product.vendor,
+                type: item.type,
+                extras: extras,
+                extrasTotal: extrasTotal
             });
 
             // Queue stock deduction to run only after order successfully saves
             stockUpdates.push({ productId: product._id, quantity });
         }
 
+        const deliveryCharge = normalizedType === "Delivery" ? (Number(clientDeliveryCharge) || 500) : 0;
+        const total = subTotal + deliveryCharge;
+
         const newOrder = new Order({
             user: userid,
             vendor: orderVendorId,
             items: orderItems,
-            totalAmount,
-            deliveryType,
-            deliveryAddress: deliveryType === "delivery" ? deliveryAddress : undefined,
+            subTotal,
+            deliveryCharge,
+            total,
+            type: normalizedType,
+            deliveryAddress: normalizedType === "Delivery" ? deliveryAddress : undefined,
             paymentMethod,
             status: "Pending",
             paymentStatus: "Pending"
@@ -81,7 +98,7 @@ export const createOrder = async (req, res) => {
         // Send order confirmation email asynchronously
         const user = await User.findById(userid);
         if (user && user.email) {
-            sendOrderConfirmationEmail(user.email, savedOrder._id, totalAmount);
+            sendOrderConfirmationEmail(user.email, savedOrder._id, total);
         }
 
         res.status(201).json({

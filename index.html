@@ -1738,31 +1738,65 @@
                             <td>Array of item objects</td>
                         </tr>
                         <tr>
-                            <td class="param-name">deliveryType</td>
+                            <td class="param-name">type</td>
                             <td class="param-type">string</td>
                             <td class="param-req required">Required</td>
-                            <td>Either 'pickup' or 'delivery'</td>
+                            <td>Either 'Pickup' or 'Delivery'</td>
                         </tr>
                         <tr>
                             <td class="param-name">paymentMethod</td>
                             <td class="param-type">string</td>
                             <td class="param-req required">Required</td>
-                            <td>Payment method (e.g. 'Credit Card')</td>
+                            <td>Payment method (e.g. 'Paystack')</td>
                         </tr>
                         <tr>
                             <td class="param-name">deliveryAddress</td>
                             <td class="param-type">string</td>
                             <td class="param-req optional">Optional</td>
-                            <td>Required if deliveryType is 'delivery'</td>
+                            <td>Required if type is 'Delivery'</td>
+                        </tr>
+                        <tr>
+                            <td class="param-name">subTotal</td>
+                            <td class="param-type">number</td>
+                            <td class="param-req optional">Optional</td>
+                            <td>Order subTotal (server-validated)</td>
+                        </tr>
+                        <tr>
+                            <td class="param-name">deliveryCharge</td>
+                            <td class="param-type">number</td>
+                            <td class="param-req optional">Optional</td>
+                            <td>Delivery charge (server-validated)</td>
+                        </tr>
+                        <tr>
+                            <td class="param-name">total</td>
+                            <td class="param-type">number</td>
+                            <td class="param-req optional">Optional</td>
+                            <td>Order total (server-validated)</td>
                         </tr></tbody></table>
                     
                 <div class="detail-title">Request Payload Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
-  "items": [{ "product": "id", "quantity": 1 }],
-  "deliveryType": "delivery",
-  "paymentMethod": "Credit Card",
-  "deliveryAddress": "123 Main St"
+  "type": "Delivery",
+  "deliveryAddress": "123 Main Street, Lagos, Nigeria",
+  "paymentMethod": "Paystack", 
+  "subTotal": 4500,
+  "deliveryCharge": 500,
+  "total": 5000,
+  "items": [
+    {
+      "product": "6a33d29a44c2afadb0663018",
+      "vendor": "5f13d29a44c2afadb0661102",
+      "quantity": 2,
+      "type": "Food",
+      "price": 2000,
+      "extras": [
+        { "name": "Extra Cheese", "price": 250 },
+        { "name": "Bacon", "price": 250 }
+      ],
+      "extrasTotal": 500
+    }
+  ]
 }</pre>
                 </div>
                     <div class="detail-title">Success Response Example</div>
