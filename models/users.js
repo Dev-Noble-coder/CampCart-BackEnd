@@ -49,5 +49,15 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpires: Date
 }, { timestamps: true });
 
+userSchema.set('toJSON', {
+    transform: function(doc, ret) {
+        if (ret.role !== 'vendor') {
+            delete ret.businessHours;
+            delete ret.businessName;
+        }
+        return ret;
+    }
+});
+
 const User = mongoose.model("users", userSchema);
 export default User;
