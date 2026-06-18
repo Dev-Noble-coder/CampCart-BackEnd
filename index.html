@@ -1231,7 +1231,27 @@
                     <span class="badge post">POST</span>
                 </a>
                 <a href="#route-agent-me" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/agent/agent-auth/me
+                    GET /api/v1/agent/auth/me
+                    <span class="badge get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6;">GET</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Admin Services</div>
+                <a href="#route-admin-signup" class="nav-link" onclick="setActiveLink(this)">
+                    POST /api/v1/admin/signup
+                    <span class="badge post">POST</span>
+                </a>
+                <a href="#route-admin-me" class="nav-link" onclick="setActiveLink(this)">
+                    GET /api/v1/admin/auth/me
+                    <span class="badge get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6;">GET</span>
+                </a>
+                <a href="#route-admin-category-post" class="nav-link" onclick="setActiveLink(this)">
+                    POST /api/v1/admin/category
+                    <span class="badge post">POST</span>
+                </a>
+                <a href="#route-admin-category-get" class="nav-link" onclick="setActiveLink(this)">
+                    GET /api/v1/admin/category
                     <span class="badge get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6;">GET</span>
                 </a>
             </div>
@@ -1946,8 +1966,8 @@
                 <div class="endpoint-header" onclick="toggleCard(this)">
                     <span class="badge-method get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">GET</span>
                     <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/agent/agent-auth/me</span>
-                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/agent/agent-auth/me')" title="Copy Full URL"
+                    <span class="endpoint-path">/api/v1/agent/auth/me</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/agent/auth/me')" title="Copy Full URL"
                         style="margin-left: 8px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1964,6 +1984,201 @@
                     <div class="code-container">
                         <pre class="code-block"><span class="json-comment">// Client must send cookies</span>
 <span class="json-key">"credentials"</span>: <span class="json-string">"include"</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN SERVICES SECTION -->
+            <div class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    style="color: var(--primary-light)">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Admin Services
+            </div>
+
+            <!-- Admin Signup Endpoint -->
+            <div class="endpoint-card" id="route-admin-signup">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method post">POST</span>
+                    <span class="endpoint-path">/api/v1/admin/signup</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/admin/signup')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Create admin account</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Registers a new admin account. The role is automatically set to "admin" and cannot be changed via the request body.</p>
+                    <div class="detail-title">Request Body Fields</div>
+                    <table class="params-table">
+                        <thead>
+                            <tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="param-name">email</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>A valid email address for the admin account.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">password</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>A secure password.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">fullName</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>The full name of the admin.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="detail-title">Success Response <span class="response-status-badge status-success">201 Created</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"Admin account created successfully"</span>,
+<span class="json-key">"role"</span>: <span class="json-string">"admin"</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Auth Me Endpoint -->
+            <div class="endpoint-card" id="route-admin-me">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">GET</span>
+                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">ADMIN</span>
+                    <span class="endpoint-path">/api/v1/admin/auth/me</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/admin/auth/me')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Get current admin info</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Retrieves the verified admin profile for the active session. Returns 403 if the authenticated user is not an admin.</p>
+                    <div class="detail-title">Required Request Configuration</div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-comment">// Client must send cookies</span>
+<span class="json-key">"credentials"</span>: <span class="json-string">"include"</span></pre>
+                    </div>
+                    <div class="detail-title">Success Response <span class="response-status-badge status-success">200 OK</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"Information pulled"</span>,
+<span class="json-key">"info"</span>: {
+  <span class="json-key">"_id"</span>: <span class="json-string">"64fa3c2e1..."</span>,
+  <span class="json-key">"fullName"</span>: <span class="json-string">"Super Admin"</span>,
+  <span class="json-key">"email"</span>: <span class="json-string">"admin@campcart.com"</span>,
+  <span class="json-key">"role"</span>: <span class="json-string">"admin"</span>
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Create Category Endpoint -->
+            <div class="endpoint-card" id="route-admin-category">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method post">POST</span>
+                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">ADMIN</span>
+                    <span class="endpoint-path">/api/v1/admin/category</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/admin/category')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Create a product category</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Allows an authenticated admin to create a new product category. Category names must be unique.</p>
+                    <div class="detail-title">Required Request Configuration</div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-comment">// Client must send cookies</span>
+<span class="json-key">"credentials"</span>: <span class="json-string">"include"</span></pre>
+                    </div>
+                    <div class="detail-title">Request Body Fields</div>
+                    <table class="params-table">
+                        <thead>
+                            <tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="param-name">name</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req required">Required</td>
+                                <td>Unique category name (e.g. "Tents", "Camping Gear").</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">icon</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req optional">Optional</td>
+                                <td>URL or emoji for the category icon.</td>
+                            </tr>
+                            <tr>
+                                <td class="param-name">description</td>
+                                <td class="param-type">string</td>
+                                <td class="param-req optional">Optional</td>
+                                <td>A short description of the category.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="detail-title">Success Response <span class="response-status-badge status-success">201 Created</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"Category created successfully"</span>,
+<span class="json-key">"category"</span>: {
+  <span class="json-key">"_id"</span>: <span class="json-string">"64fb2a1d3..."</span>,
+  <span class="json-key">"name"</span>: <span class="json-string">"Tents"</span>,
+  <span class="json-key">"icon"</span>: <span class="json-string">"⛺"</span>,
+  <span class="json-key">"description"</span>: <span class="json-string">"All kinds of camping tents"</span>
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Get Categories Endpoint -->
+            <div class="endpoint-card" id="route-admin-category-get">
+                <div class="endpoint-header" onclick="toggleCard(this)">
+                    <span class="badge-method get" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">GET</span>
+                    <span class="endpoint-path">/api/v1/admin/category</span>
+                    <button class="icon-btn" onclick="copyEndpoint(event, '/api/v1/admin/category')" title="Copy Full URL"
+                        style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="endpoint-short-desc">Get all product categories</span>
+                    <span class="chevron-icon">▼</span>
+                </div>
+                <div class="endpoint-details">
+                    <p class="detail-description">Retrieves a list of all product categories available on the platform. This endpoint is public.</p>
+                    <div class="detail-title">Success Response <span class="response-status-badge status-success">200 OK</span></div>
+                    <div class="code-container">
+                        <pre class="code-block"><span class="json-key">"message"</span>: <span class="json-string">"Categories fetched successfully"</span>,
+<span class="json-key">"categories"</span>: [
+  {
+    <span class="json-key">"_id"</span>: <span class="json-string">"64fb2a1d3..."</span>,
+    <span class="json-key">"name"</span>: <span class="json-string">"Tents"</span>,
+    <span class="json-key">"icon"</span>: <span class="json-string">"⛺"</span>,
+    <span class="json-key">"description"</span>: <span class="json-string">"All kinds of camping tents"</span>
+  }
+]</pre>
                     </div>
                 </div>
             </div>
@@ -1993,7 +2208,11 @@
                         <option value="create-product">POST /vendor/products — Create Product</option>
                         <option value="get-product">GET /vendor/products — Get Vendor Products</option>
                         <option value="agent-signup">POST /agent/signup — Create Agent Account</option>
-                        <option value="agent-me">GET /agent/agent-auth/me — Get Current Agent</option>
+                        <option value="agent-me">GET /agent/auth/me — Get Current Agent</option>
+                        <option value="admin-signup">POST /admin/signup — Create Admin Account</option>
+                        <option value="admin-me">GET /admin/auth/me — Get Current Admin</option>
+                        <option value="admin-category">POST /admin/category — Create Category</option>
+                        <option value="admin-category-get">GET /admin/category — Get Categories</option>
                     </select>
                 </div>
 
@@ -2461,7 +2680,7 @@ export function useAgentSignup() {
             'agent-me': {
                 fetch: `// Get currently logged-in agent
 const response = await fetch(
-  '\${BASE_URL}/api/v1/agent/agent-auth/me',
+  '\${BASE_URL}/api/v1/agent/auth/me',
   {
     method: 'GET',
     credentials: 'include', // Send auth cookie
@@ -2474,7 +2693,7 @@ console.log(data.info);`,
 import axios from 'axios';
 
 const { data } = await axios.get(
-  '\${BASE_URL}/api/v1/agent/agent-auth/me',
+  '\${BASE_URL}/api/v1/agent/auth/me',
   { withCredentials: true } // Send auth cookie
 );
 
@@ -2487,7 +2706,7 @@ export function useCurrentAgent() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('\${BASE_URL}/api/v1/agent/agent-auth/me', {
+    fetch('\${BASE_URL}/api/v1/agent/auth/me', {
       credentials: 'include',
     })
       .then(r => r.json())
@@ -2496,6 +2715,191 @@ export function useCurrentAgent() {
   }, []);
 
   return { agent, loading };
+}`
+            },
+            'admin-signup': {
+                fetch: `// Register a new CampCart admin
+const response = await fetch('\${BASE_URL}/api/v1/admin/signup', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    fullName: 'Super Admin',
+    email: 'admin@campcart.com',
+    password: 'secureAdminPass!'
+  })
+});
+
+const data = await response.json();
+console.log(data);`,
+                axios: `// Register a new CampCart admin
+import axios from 'axios';
+
+const { data } = await axios.post(
+  '\${BASE_URL}/api/v1/admin/signup',
+  {
+    fullName: 'Super Admin',
+    email: 'admin@campcart.com',
+    password: 'secureAdminPass!'
+  }
+);
+
+console.log(data);`,
+                react: `// useAdminSignup Hook (React)
+import { useState } from 'react';
+
+export function useAdminSignup() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const signup = async (fullName, email, password) => {
+    setLoading(true);
+    try {
+      const res = await fetch('\${BASE_URL}/api/v1/admin/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullName, email, password }),
+      });
+      return await res.json();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { signup, loading, error };
+}`
+            },
+            'admin-me': {
+                fetch: `// Get currently logged-in admin
+const response = await fetch(
+  '\${BASE_URL}/api/v1/admin/auth/me',
+  {
+    method: 'GET',
+    credentials: 'include', // Send admin auth cookie
+  }
+);
+
+const data = await response.json();
+console.log(data.info);`,
+                axios: `// Get currently logged-in admin
+import axios from 'axios';
+
+const { data } = await axios.get(
+  '\${BASE_URL}/api/v1/admin/auth/me',
+  { withCredentials: true }
+);
+
+console.log(data.info);`,
+                react: `// useCurrentAdmin Hook (React)
+import { useEffect, useState } from 'react';
+
+export function useCurrentAdmin() {
+  const [admin, setAdmin] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('\${BASE_URL}/api/v1/admin/auth/me', {
+      credentials: 'include',
+    })
+      .then(r => r.json())
+      .then(data => setAdmin(data.info))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { admin, loading };
+}`
+            },
+            'admin-category': {
+                fetch: `// Create a product category (Admin only)
+const response = await fetch('\${BASE_URL}/api/v1/admin/category', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  credentials: 'include', // Admin auth cookie
+  body: JSON.stringify({
+    name: 'Tents',
+    icon: '⛺',
+    description: 'All kinds of camping tents'
+  })
+});
+
+const data = await response.json();
+console.log(data.category);`,
+                axios: `// Create a product category (Admin only)
+import axios from 'axios';
+
+const { data } = await axios.post(
+  '\${BASE_URL}/api/v1/admin/category',
+  {
+    name: 'Tents',
+    icon: '⛺',
+    description: 'All kinds of camping tents'
+  },
+  { withCredentials: true } // Admin auth cookie
+);
+
+console.log(data.category);`,
+                react: `// useCreateCategory Hook (React - Admin)
+import { useState } from 'react';
+
+export function useCreateCategory() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const createCategory = async (name, icon, description) => {
+    setLoading(true);
+    try {
+      const res = await fetch('\${BASE_URL}/api/v1/admin/category', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ name, icon, description }),
+      });
+      return await res.json();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { createCategory, loading, error };
+}`
+            },
+            'admin-category-get': {
+                fetch: `// Get all product categories
+const response = await fetch(
+  '\${BASE_URL}/api/v1/admin/category',
+  { method: 'GET' }
+);
+
+const data = await response.json();
+console.log(data.categories);`,
+                axios: `// Get all product categories
+import axios from 'axios';
+
+const { data } = await axios.get('\${BASE_URL}/api/v1/admin/category');
+
+console.log(data.categories);`,
+                react: `// useGetCategories Hook (React)
+import { useEffect, useState } from 'react';
+
+export function useGetCategories() {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('\${BASE_URL}/api/v1/admin/category')
+      .then(r => r.json())
+      .then(data => setCategories(data.categories))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { categories, loading };
 }`
             }
         };

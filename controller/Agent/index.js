@@ -6,6 +6,6 @@ import authorization from "../../middleware/middleware.js";
 const router = express.Router();
 
 router.post("/signup", signup);
-router.get("/agent-auth/me", authorization, userinfo);
+router.get("/auth/me", authorization, userinfo);
 
 export default router;

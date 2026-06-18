@@ -5,6 +5,7 @@ import DbConnect from "./lib/dbConnect.js";
 import userRoutes from "./controller/user/index.js";
 import vendorRoutes from "./controller/vendor/index.js";
 import agentRoutes from "./controller/Agent/index.js";
+import adminRoutes from "./controller/admin/index.js";
 import path from "path";
 import cookieParser from "cookie-parser";
 
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1", userRoutes);
 app.use("/api/v1/vendor", vendorRoutes);
 app.use("/api/v1/agent", agentRoutes);
+app.use("/api/v1/admin", adminRoutes);
 
 const PORT = process.env.PORT || 5001;
 

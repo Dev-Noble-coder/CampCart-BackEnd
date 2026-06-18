@@ -1,3 +1,4 @@
+import Category from "../../../models/category.js";
 import Product from "../../../models/product.js";
 import User from "../../../models/users.js";
 
@@ -91,4 +92,31 @@ export const getProduct = async (req,res) => {
             error: error.message
         });
     }
+}
+export const getCatigory = async (req,res) => {
+    try {
+        const userid = req.accessToken.userID || req.accessToken.id;
+
+        const availableCatigory = await Category.find({}).select("name description")
+
+        if(!availableCatigory){
+            return res.status(400).json({
+                message : "An error occur "
+            })
+        }
+        res.status(200).json({
+            message : "catigory pulled ",
+            catigory : availableCatigory
+        })
+
+
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "An error occurred while fetching the products",
+            error: error.message
+        });
+    }
+
 }
