@@ -18,7 +18,7 @@ app.use(cookieParser());
 // Configure CORS to accept requests from frontend domains
 app.use(cors({
      origin: [
-        "https://split-pay-vert.vercel.app",
+        "https://camp-cart-front-end.vercel.app",
         "http://localhost:3000"
     ],
     credentials: true
