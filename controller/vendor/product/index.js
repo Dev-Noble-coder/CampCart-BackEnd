@@ -60,6 +60,7 @@ export const getProduct = async (req,res) => {
         const skip = (page - 1) * limit;
 
         const fetchuserProduct = await Product.find({ vendor: userid })
+            .populate("category", "name description icon")
             .skip(skip)
             .limit(limit);
             
