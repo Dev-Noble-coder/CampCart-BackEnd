@@ -76,11 +76,11 @@ export const createOrder = async (req, res) => {
         }
 
         const savedOrders = [];
-        let isFirstVendor = true;
         let overallTotal = 0;
+        const totalVendors = Object.keys(vendorGroups).length;
 
         for (const [vendorId, group] of Object.entries(vendorGroups)) {
-            const vendorDeliveryCharge = isFirstVendor && normalizedType === "Delivery" ? (Number(clientDeliveryCharge) || 500) : 0;
+            const vendorDeliveryCharge = normalizedType === "Delivery" ? ((Number(clientDeliveryCharge) || 500) / totalVendors) : 0;
             const vendorTotal = group.subTotal + vendorDeliveryCharge;
             overallTotal += vendorTotal;
 
@@ -100,7 +100,6 @@ export const createOrder = async (req, res) => {
 
             const savedOrder = await newOrder.save();
             savedOrders.push(savedOrder);
-            isFirstVendor = false;
         }
 
         // Safely deduct stock now that orders are confirmed saved
@@ -134,6 +133,7 @@ export const getUserOrders = async (req, res) => {
         
         const orders = await Order.find({ user: userid })
             .populate("items.product", "name images price")
+            .populate("vendor", "businessName fullName")
             .sort({ createdAt: -1 });
 
         res.status(200).json({
