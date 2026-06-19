@@ -1180,196 +1180,201 @@
             </a>
 
             
-            <div class="nav-section">
-                <div class="nav-section-title">Authentication</div>
-                <a href="#route-user-signup" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/signup
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-login" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/login
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-logout" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/auth/logout
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-forgot-password" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/auth/forgot-password
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-reset-password" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/auth/reset-password/:token
-                    <span class="badge post">POST</span>
-                </a></div>
-            <div class="nav-section">
-                <div class="nav-section-title">User Services</div>
-                <a href="#route-auth-me" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/auth/me
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-update-profile" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/users/profile
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-become-vendor" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/users/become-vendor
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-user-orders-create" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/orders
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-user-orders-get" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/orders
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-user-orders-id" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/orders/:id
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-user-wishlist" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/wishlist
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-user-wishlist-add" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/wishlist/add
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-user-wishlist-remove" class="nav-link" onclick="setActiveLink(this)">
-                    DELETE /api/v1/wishlist/remove/:productId
-                    <span class="badge delete">DELETE</span>
-                </a></div>
-            <div class="nav-section">
-                <div class="nav-section-title">Vendor Services</div>
-                <a href="#route-vendor-auth-me" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/vendor/auth/me
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-vendor-categories" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/vendor/getCatigotries
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-vendor-products-create" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/vendor/products
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-vendor-products-get" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/vendor/products
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-vendor-products-id" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/vendor/products/:id
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-vendor-products-update" class="nav-link" onclick="setActiveLink(this)">
-                    PUT /api/v1/vendor/products/:id
-                    <span class="badge put">PUT</span>
-                </a>
-                <a href="#route-vendor-products-delete" class="nav-link" onclick="setActiveLink(this)">
-                    DELETE /api/v1/vendor/products/:id
-                    <span class="badge delete">DELETE</span>
-                </a>
-                <a href="#route-vendor-orders" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/vendor/orders
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-vendor-orders-id" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/vendor/orders/:id
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-vendor-orders-status" class="nav-link" onclick="setActiveLink(this)">
-                    PUT /api/v1/vendor/orders/:id/status
-                    <span class="badge put">PUT</span>
-                </a>
-                <a href="#route-vendor-profile" class="nav-link" onclick="setActiveLink(this)">
-                    PUT /api/v1/vendor/profile
-                    <span class="badge put">PUT</span>
-                </a>
-                <a href="#route-vendor-dashboard" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/vendor/dashboard
-                    <span class="badge get">GET</span>
-                </a></div>
-            <div class="nav-section">
-                <div class="nav-section-title">Agent Services</div>
-                <a href="#route-agent-signup" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/agent/signup
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-agent-me" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/agent/auth/me
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-agent-orders-available" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/agent/orders/available
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-agent-orders-accept" class="nav-link" onclick="setActiveLink(this)">
-                    PUT /api/v1/agent/orders/:id/accept
-                    <span class="badge put">PUT</span>
-                </a>
-                <a href="#route-agent-orders-assigned" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/agent/orders/assigned
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-agent-orders-status" class="nav-link" onclick="setActiveLink(this)">
-                    PUT /api/v1/agent/orders/:id/status
-                    <span class="badge put">PUT</span>
-                </a></div>
-            <div class="nav-section">
-                <div class="nav-section-title">Admin Services</div>
-                <a href="#route-admin-signup" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/admin/signup
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-admin-me" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/admin/auth/me
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-admin-category" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/admin/category
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-admin-category-get" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/admin/category
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-admin-agents-orders" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/admin/agents/:id/orders
-                    <span class="badge get">GET</span>
-                </a></div>
-            <div class="nav-section">
-                <div class="nav-section-title">Product Services</div>
-                <a href="#route-public-products" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/products
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-public-products-id" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/products/:id
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-public-categories" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/categories
-                    <span class="badge get">GET</span>
-                </a></div>
-            <div class="nav-section">
-                <div class="nav-section-title">Review Services</div>
-                <a href="#route-reviews-get" class="nav-link" onclick="setActiveLink(this)">
-                    GET /api/v1/reviews/products/:productId
-                    <span class="badge get">GET</span>
-                </a>
-                <a href="#route-reviews-post" class="nav-link" onclick="setActiveLink(this)">
-                    POST /api/v1/reviews/products/:productId
-                    <span class="badge post">POST</span>
-                </a>
-                <a href="#route-reviews-put" class="nav-link" onclick="setActiveLink(this)">
-                    PUT /api/v1/reviews/:id
-                    <span class="badge put">PUT</span>
-                </a>
-                <a href="#route-reviews-delete" class="nav-link" onclick="setActiveLink(this)">
-                    DELETE /api/v1/reviews/:id
-                    <span class="badge delete">DELETE</span>
-                </a></div>
+            
+    <div class="nav-section">
+        <div class="nav-section-title">Authentication</div>
+        <a href="#route-user-signup" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/signup
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-login" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/login
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-logout" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/auth/logout
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-forgot-password" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/auth/forgot-password
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-reset-password" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/auth/reset-password/:token
+            <span class="badge post">POST</span>
+        </a></div>
+    <div class="nav-section">
+        <div class="nav-section-title">User Services</div>
+        <a href="#route-auth-me" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/auth/me
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-update-profile" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/users/profile
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-become-vendor" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/users/become-vendor
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-user-orders-create" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/orders
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-user-orders-get" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/orders
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-user-orders-id" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/orders/:id
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-user-wishlist" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/wishlist
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-user-wishlist-add" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/wishlist/add
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-user-wishlist-remove" class="nav-link" onclick="setActiveLink(this)">
+            DELETE /api/v1/wishlist/remove/:productId
+            <span class="badge delete">DELETE</span>
+        </a></div>
+    <div class="nav-section">
+        <div class="nav-section-title">Vendor Services</div>
+        <a href="#route-vendor-auth-me" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/auth/me
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-categories" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/getCatigotries
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-products-create" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/vendor/products
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-vendor-products-get" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/products
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-products-id" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/products/:id
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-products-update" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/vendor/products/:id
+            <span class="badge put">PUT</span>
+        </a>
+        <a href="#route-vendor-products-delete" class="nav-link" onclick="setActiveLink(this)">
+            DELETE /api/v1/vendor/products/:id
+            <span class="badge delete">DELETE</span>
+        </a>
+        <a href="#route-vendor-orders" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/orders
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-orders-id" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/orders/:id
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-orders-status" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/vendor/orders/:id/status
+            <span class="badge put">PUT</span>
+        </a>
+        <a href="#route-vendor-profile" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/vendor/profile
+            <span class="badge put">PUT</span>
+        </a>
+        <a href="#route-vendor-dashboard" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/dashboard
+            <span class="badge get">GET</span>
+        </a></div>
+    <div class="nav-section">
+        <div class="nav-section-title">Agent Services</div>
+        <a href="#route-agent-signup" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/agent/signup
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-agent-me" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/agent/auth/me
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-agent-orders-available" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/agent/orders/available
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-agent-orders-accept" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/agent/orders/:id/accept
+            <span class="badge put">PUT</span>
+        </a>
+        <a href="#route-agent-orders-assigned" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/agent/orders/assigned
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-agent-orders-status" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/agent/orders/:id/status
+            <span class="badge put">PUT</span>
+        </a>
+        <a href="#route-agent-toggle-online" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/agent/toggle-online
+            <span class="badge put">PUT</span>
+        </a>
+        <a href="#route-agent-profile" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/agent/profile
+            <span class="badge put">PUT</span>
+        </a></div>
+    <div class="nav-section">
+        <div class="nav-section-title">Admin Services</div>
+        <a href="#route-admin-signup" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/admin/signup
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-admin-me" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/admin/auth/me
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-admin-category" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/admin/category
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-admin-category-get" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/admin/category
+            <span class="badge get">GET</span>
+        </a></div>
+    <div class="nav-section">
+        <div class="nav-section-title">Product Services</div>
+        <a href="#route-public-products" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/products
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-public-products-id" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/products/:id
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-public-categories" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/categories
+            <span class="badge get">GET</span>
+        </a></div>
+    <div class="nav-section">
+        <div class="nav-section-title">Review Services</div>
+        <a href="#route-reviews-get" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/reviews/products/:productId
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-reviews-post" class="nav-link" onclick="setActiveLink(this)">
+            POST /api/v1/reviews/products/:productId
+            <span class="badge post">POST</span>
+        </a>
+        <a href="#route-reviews-put" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/reviews/:id
+            <span class="badge put">PUT</span>
+        </a>
+        <a href="#route-reviews-delete" class="nav-link" onclick="setActiveLink(this)">
+            DELETE /api/v1/reviews/:id
+            <span class="badge delete">DELETE</span>
+        </a></div>
         </aside>
 
         <!-- Center Main Documentation Content Panel -->
@@ -1425,1439 +1430,1355 @@
             <!-- Signup Endpoint -->
             
             <div class="section-title">Authentication</div>
-            <div class="endpoint-card" id="route-user-signup">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    
-                    <span class="endpoint-path">/api/v1/signup</span>
-                    <span class="endpoint-short-desc">Create user</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Registers a new user account in the CampCart database.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">email</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Valid email address</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">password</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Secure password</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">fullName</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Full name</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
-                <div class="code-container">
-                    <pre class="code-block">{
+            <div id="endpoints-container">
+                
+    <div class="section-title">
+        Authentication
+    </div>
+        <div class="endpoint-card" id="route-user-signup">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                
+                <span class="endpoint-path">/api/v1/signup</span>
+                <span class="endpoint-short-desc">Create user</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Registers a new user account in the CampCart database.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">email</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Valid email address</td>
+                </tr>
+                <tr>
+                    <td class="param-name">password</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Secure password</td>
+                </tr>
+                <tr>
+                    <td class="param-name">fullName</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Full name</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "email": "user@example.com",
   "password": "securePass123!",
   "fullName": "John Doe"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Account created successfully",
   "role": "user"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-login">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    
-                    <span class="endpoint-path">/api/v1/login</span>
-                    <span class="endpoint-short-desc">Login & get tokens</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Authenticates credentials and establishes a session.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">email</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Registered email</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">password</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Password</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
-                <div class="code-container">
-                    <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-login">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                
+                <span class="endpoint-path">/api/v1/login</span>
+                <span class="endpoint-short-desc">Login & get tokens</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Authenticates credentials and establishes a session.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">email</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Registered email</td>
+                </tr>
+                <tr>
+                    <td class="param-name">password</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Password</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "email": "user@example.com",
   "password": "securePass123!"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Logged in successfully",
   "userRole": "user",
   "accessToken": "ey..."
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-logout">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    
-                    <span class="endpoint-path">/api/v1/auth/logout</span>
-                    <span class="endpoint-short-desc">Logout user</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Clears the access and refresh tokens from cookies.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-logout">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                
+                <span class="endpoint-path">/api/v1/auth/logout</span>
+                <span class="endpoint-short-desc">Logout user</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Clears the access and refresh tokens from cookies.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Logged out successfully"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-forgot-password">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    
-                    <span class="endpoint-path">/api/v1/auth/forgot-password</span>
-                    <span class="endpoint-short-desc">Forgot password</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Sends a password reset token to the user email.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">email</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Registered email</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
-                <div class="code-container">
-                    <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-forgot-password">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                
+                <span class="endpoint-path">/api/v1/auth/forgot-password</span>
+                <span class="endpoint-short-desc">Forgot password</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Sends a password reset token to the user email.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">email</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Registered email</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "email": "user@example.com"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "message": "Password reset token generated"
-}</pre>
-                    </div>
-                </div>
             </div>
-            <div class="endpoint-card" id="route-reset-password">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    
-                    <span class="endpoint-path">/api/v1/auth/reset-password/:token</span>
-                    <span class="endpoint-short-desc">Reset password</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Resets the password using the token.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">password</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>New password</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
+                <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
-  "password": "newSecurePass123!"
+  "message": "Password reset token generated"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "message": "Password reset successful"
-}</pre>
-                    </div>
                 </div>
             </div>
-            <div class="section-title">User Services</div>
-            <div class="endpoint-card" id="route-auth-me">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/auth/me</span>
-                    <span class="endpoint-short-desc">Get active user</span>
-                    <span class="chevron-icon">▼</span>
+        </div>
+        <div class="endpoint-card" id="route-reset-password">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                
+                <span class="endpoint-path">/api/v1/auth/reset-password/:token</span>
+                <span class="endpoint-short-desc">Reset password</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Resets the password using the token.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">password</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>New password</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
+  "password": "newSecurePass123!"
+}</pre>
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Password reset successful"
+}</pre>
                 </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Retrieves verified user data for the active session.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+        </div>
+    <div class="section-title">
+        User Services
+    </div>
+        <div class="endpoint-card" id="route-auth-me">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/auth/me</span>
+                <span class="endpoint-short-desc">Get active user</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Retrieves verified user data for the active session.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Information pulled",
   "info": { "_id": "...", "fullName": "John", "role": "user" }
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-update-profile">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/users/profile</span>
-                    <span class="endpoint-short-desc">Update profile</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Updates phone number, address.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">phoneNumber</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Phone number</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">address</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Address</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
-                <div class="code-container">
-                    <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-update-profile">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/users/profile</span>
+                <span class="endpoint-short-desc">Update profile</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Updates phone number, address.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">phoneNumber</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req optional">Optional</td>
+                    <td>Phone number</td>
+                </tr>
+                <tr>
+                    <td class="param-name">address</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req optional">Optional</td>
+                    <td>Address</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "phoneNumber": "+123456789",
   "address": "123 Main St"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Profile updated successfully",
   "user": { ... }
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-become-vendor">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/users/become-vendor</span>
-                    <span class="endpoint-short-desc">Become a vendor</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Upgrades a standard user to a vendor by setting their business name.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">businessName</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Business name</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
-                <div class="code-container">
-                    <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-become-vendor">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/users/become-vendor</span>
+                <span class="endpoint-short-desc">Become a vendor</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Upgrades a standard user to a vendor by setting their business name.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">businessName</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Business name</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "businessName": "Camp Gear Co."
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Successfully became a vendor",
   "user": { "role": "vendor", "businessName": "Camp Gear Co." }
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-user-orders-create">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/orders</span>
-                    <span class="endpoint-short-desc">Create order</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Creates a new order from user items.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">items</td>
-                            <td class="param-type">array</td>
-                            <td class="param-req required">Required</td>
-                            <td>Array of item objects</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">type</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Either 'Pickup' or 'Delivery'</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">paymentMethod</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Payment method (e.g. 'Paystack')</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">deliveryAddress</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Required if type is 'Delivery'</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">subTotal</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Order subTotal (server-validated)</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">deliveryCharge</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Delivery charge (server-validated)</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">total</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Order total (server-validated)</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
+        </div>
+        <div class="endpoint-card" id="route-user-orders-create">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/orders</span>
+                <span class="endpoint-short-desc">Create order</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Creates a new order from user items.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">items</td>
+                    <td class="param-type">array</td>
+                    <td class="param-req required">Required</td>
+                    <td>Array of item objects</td>
+                </tr>
+                <tr>
+                    <td class="param-name">shippingAddress</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Address</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
+  "items": [{ "product": "id", "quantity": 1 }],
+  "shippingAddress": "123 Main St"
+}</pre>
+            </div>
+                <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
-  "type": "Delivery",
-  "deliveryAddress": "123 Main Street, Lagos, Nigeria",
-  "paymentMethod": "Paystack", 
-  "subTotal": 4500,
-  "deliveryCharge": 500,
-  "total": 5000,
-  "items": [
-    {
-      "product": "6a33d29a44c2afadb0663018",
-      "vendor": "5f13d29a44c2afadb0661102",
-      "quantity": 2,
-      "type": "Food",
-      "price": 2000,
-      "extras": [
-        { "name": "Extra Cheese", "price": 250 },
-        { "name": "Bacon", "price": 250 }
-      ],
-      "extrasTotal": 500
-    }
-  ]
+  "message": "Order created successfully",
+  "order": { ... }
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "message": "Orders placed successfully",
-  "orders": [ { ... }, { ... } ]
-}</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-user-orders-get">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/orders</span>
-                    <span class="endpoint-short-desc">Get user orders</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets all orders for the current user.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-user-orders-get">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/orders</span>
+                <span class="endpoint-short-desc">Get user orders</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets all orders for the current user.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Orders fetched",
   "orders": []
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-user-orders-id">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/orders/:id</span>
-                    <span class="endpoint-short-desc">Get order by ID</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets a specific order details.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-user-orders-id">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/orders/:id</span>
+                <span class="endpoint-short-desc">Get order by ID</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets a specific order details.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Order details",
   "order": { ... }
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-user-wishlist">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/wishlist</span>
-                    <span class="endpoint-short-desc">Get wishlist</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets user wishlist items.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-user-wishlist">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/wishlist</span>
+                <span class="endpoint-short-desc">Get wishlist</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets user wishlist items.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Wishlist fetched",
   "wishlist": []
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-user-wishlist-add">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/wishlist/add</span>
-                    <span class="endpoint-short-desc">Add to wishlist</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Adds a product to user wishlist.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">productId</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Product ID</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
-                <div class="code-container">
-                    <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-user-wishlist-add">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/wishlist/add</span>
+                <span class="endpoint-short-desc">Add to wishlist</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Adds a product to user wishlist.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">productId</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Product ID</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "productId": "64f8b..."
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Added to wishlist"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-user-wishlist-remove">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method delete">DELETE</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/wishlist/remove/:productId</span>
-                    <span class="endpoint-short-desc">Remove from wishlist</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Removes a product from user wishlist.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-user-wishlist-remove">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method delete">DELETE</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/wishlist/remove/:productId</span>
+                <span class="endpoint-short-desc">Remove from wishlist</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Removes a product from user wishlist.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Removed from wishlist"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="section-title">Vendor Services</div>
-            <div class="endpoint-card" id="route-vendor-auth-me">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/auth/me</span>
-                    <span class="endpoint-short-desc">Get active vendor</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Retrieves verified vendor data.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+    <div class="section-title">
+        Vendor Services
+    </div>
+        <div class="endpoint-card" id="route-vendor-auth-me">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/auth/me</span>
+                <span class="endpoint-short-desc">Get active vendor</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Retrieves verified vendor data.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Information pulled",
   "info": { ... }
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-categories">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/getCatigotries</span>
-                    <span class="endpoint-short-desc">Get categories</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets categories for vendor product creation.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "categories": []
-}</pre>
-                    </div>
-                </div>
+        </div>
+        <div class="endpoint-card" id="route-vendor-categories">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/getCatigotries</span>
+                <span class="endpoint-short-desc">Get categories</span>
+                <span class="chevron-icon">▼</span>
             </div>
-            <div class="endpoint-card" id="route-vendor-products-create">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/products</span>
-                    <span class="endpoint-short-desc">Create product</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Creates a new product (Vendor only).</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">name</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Product name</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">price</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req required">Required</td>
-                            <td>Price</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">category</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Category ID</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets categories for vendor product creation.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
+  "categories": []
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-vendor-products-create">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/products</span>
+                <span class="endpoint-short-desc">Create product</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Creates a new product (Vendor only).</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">name</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Product name</td>
+                </tr>
+                <tr>
+                    <td class="param-name">price</td>
+                    <td class="param-type">number</td>
+                    <td class="param-req required">Required</td>
+                    <td>Price</td>
+                </tr>
+                <tr>
+                    <td class="param-name">category</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Category ID</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "name": "Tent",
   "price": 100,
   "category": "..."
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Product created",
   "product": { ... }
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-products-get">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/products</span>
-                    <span class="endpoint-short-desc">Get vendor products</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Retrieves paginated products for the vendor.</p>
-                    
-                <div class="detail-title">Query Parameters</div>
-                <table class="params-table">
-                    <thead><tr><th>Parameter</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">search</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Search by product name</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">category</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Filter by category ID</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">page</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Page number (default: 1)</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">limit</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Items per page (default: 10)</td>
-                        </tr>
-                    </tbody>
-                </table>
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-vendor-products-get">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/products</span>
+                <span class="endpoint-short-desc">Get vendor products</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Retrieves paginated products for the vendor.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "products": [],
   "total": 10
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-products-id">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/products/:id</span>
-                    <span class="endpoint-short-desc">Get product by ID</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Retrieves a single product for the vendor.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-vendor-products-id">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/products/:id</span>
+                <span class="endpoint-short-desc">Get product by ID</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Retrieves a single product for the vendor.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "product": { ... }
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-products-update">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method put">PUT</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/products/:id</span>
-                    <span class="endpoint-short-desc">Update product</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Updates a product.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">price</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>New price</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
-                <div class="code-container">
-                    <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-vendor-products-update">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/products/:id</span>
+                <span class="endpoint-short-desc">Update product</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Updates a product.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">price</td>
+                    <td class="param-type">number</td>
+                    <td class="param-req optional">Optional</td>
+                    <td>New price</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "price": 120
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Product updated"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-products-delete">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method delete">DELETE</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/products/:id</span>
-                    <span class="endpoint-short-desc">Delete product</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Deletes a product.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-vendor-products-delete">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method delete">DELETE</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/products/:id</span>
+                <span class="endpoint-short-desc">Delete product</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Deletes a product.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Product deleted"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-orders">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/orders</span>
-                    <span class="endpoint-short-desc">Get vendor orders</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets orders containing vendor products.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-vendor-orders">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/orders</span>
+                <span class="endpoint-short-desc">Get vendor orders</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets orders containing vendor products.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "orders": []
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-orders-id">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/orders/:id</span>
-                    <span class="endpoint-short-desc">Get vendor order ID</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets details of a vendor order.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-vendor-orders-id">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/orders/:id</span>
+                <span class="endpoint-short-desc">Get vendor order ID</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets details of a vendor order.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "order": { ... }
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-orders-status">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method put">PUT</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/orders/:id/status</span>
-                    <span class="endpoint-short-desc">Update order status</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Updates order status (e.g. processing, shipped).</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">status</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Order status</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
-                <div class="code-container">
-                    <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-vendor-orders-status">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/orders/:id/status</span>
+                <span class="endpoint-short-desc">Update order status</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Updates order status (e.g. processing, shipped).</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">status</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Order status</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "status": "shipped"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Status updated"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-profile">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method put">PUT</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/profile</span>
-                    <span class="endpoint-short-desc">Update profile</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Updates vendor profile.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">businessName</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Business name</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">address</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Vendor business address</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">phoneNumber</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Contact phone number</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">businessHours</td>
-                            <td class="param-type">object</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Operating hours for all 7 days</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">storeDescription</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Detailed description of the store</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
+        </div>
+        <div class="endpoint-card" id="route-vendor-profile">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/profile</span>
+                <span class="endpoint-short-desc">Update profile</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Updates vendor profile.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">businessName</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req optional">Optional</td>
+                    <td>Business name</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
+  "businessName": "New Name"
+}</pre>
+            </div>
+                <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
-  "businessName": "New Name",
-  "address": "123 Main St",
-  "phoneNumber": "+1234567890",
-  "storeDescription": "We sell the best goods in town!",
-  "businessHours": {
-    "monday": { "isOpen": true, "openTime": "08:00", "closeTime": "20:00" },
-    "sunday": { "isOpen": false, "openTime": "00:00", "closeTime": "00:00" }
-  }
-}</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
   "message": "Profile updated"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-vendor-dashboard">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/vendor/dashboard</span>
-                    <span class="endpoint-short-desc">Get dashboard stats</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets vendor dashboard statistics.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "stats": { "totalSales": 1000 }
-}</pre>
-                    </div>
-                </div>
+        </div>
+        <div class="endpoint-card" id="route-vendor-dashboard">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/dashboard</span>
+                <span class="endpoint-short-desc">Get dashboard stats</span>
+                <span class="chevron-icon">▼</span>
             </div>
-            <div class="section-title">Agent Services</div>
-            <div class="endpoint-card" id="route-agent-signup">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    
-                    <span class="endpoint-path">/api/v1/agent/signup</span>
-                    <span class="endpoint-short-desc">Create agent</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Registers a new agent account.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">email</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Email</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">password</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Password</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">fullName</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Full Name</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets vendor dashboard statistics.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
+  "stats": { "totalSales": 1000 }
+}</pre>
+                </div>
+            </div>
+        </div>
+    <div class="section-title">
+        Agent Services
+    </div>
+        <div class="endpoint-card" id="route-agent-signup">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                
+                <span class="endpoint-path">/api/v1/agent/signup</span>
+                <span class="endpoint-short-desc">Create agent</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Registers a new agent account.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">email</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Email</td>
+                </tr>
+                <tr>
+                    <td class="param-name">password</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Password</td>
+                </tr>
+                <tr>
+                    <td class="param-name">fullName</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Full Name</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "email": "agent@example.com",
   "password": "pass",
   "fullName": "Agent Smith"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Agent created"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-agent-me">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/agent/auth/me</span>
-                    <span class="endpoint-short-desc">Get active agent</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Retrieves agent profile.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-agent-me">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/agent/auth/me</span>
+                <span class="endpoint-short-desc">Get active agent</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Retrieves agent profile.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "info": { ... }
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-agent-orders-available">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/agent/orders/available</span>
-                    <span class="endpoint-short-desc">Get available orders</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets orders available for delivery.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-agent-orders-available">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/agent/orders/available</span>
+                <span class="endpoint-short-desc">Get available orders</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets orders available for delivery.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "orders": []
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-agent-orders-accept">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method put">PUT</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/agent/orders/:id/accept</span>
-                    <span class="endpoint-short-desc">Accept order</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Agent accepts an order for delivery.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-agent-orders-accept">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/agent/orders/:id/accept</span>
+                <span class="endpoint-short-desc">Accept order</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Agent accepts an order for delivery.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Order accepted"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-agent-orders-assigned">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/agent/orders/assigned</span>
-                    <span class="endpoint-short-desc">Get assigned orders</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets orders assigned to the agent.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-agent-orders-assigned">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/agent/orders/assigned</span>
+                <span class="endpoint-short-desc">Get assigned orders</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets orders assigned to the agent.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "orders": []
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-agent-orders-status">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method put">PUT</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/agent/orders/:id/status</span>
-                    <span class="endpoint-short-desc">Update delivery status</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Updates delivery status (e.g. delivered).</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">deliveryStatus</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Delivery Status</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
-                <div class="code-container">
-                    <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-agent-orders-status">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/agent/orders/:id/status</span>
+                <span class="endpoint-short-desc">Update delivery status</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Updates delivery status (e.g. delivered).</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">deliveryStatus</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Delivery Status</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "deliveryStatus": "delivered"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "message": "Status updated"
-}</pre>
-                    </div>
-                </div>
             </div>
-            <div class="section-title">Admin Services</div>
-            <div class="endpoint-card" id="route-admin-signup">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    
-                    <span class="endpoint-path">/api/v1/admin/signup</span>
-                    <span class="endpoint-short-desc">Create admin</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Registers a new admin.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">email</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Email</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">password</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Password</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
+                <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
+  "message": "Status updated"
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-agent-toggle-online">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/agent/toggle-online</span>
+                <span class="endpoint-short-desc">Toggle online status</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Toggles the agent online/offline status.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">isOnline</td>
+                    <td class="param-type">boolean</td>
+                    <td class="param-req required">Required</td>
+                    <td>Online status</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
+  "isOnline": true
+}</pre>
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Agent is now online",
+  "isOnline": true
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-agent-profile">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/agent/profile</span>
+                <span class="endpoint-short-desc">Update agent profile</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Updates agent profile (address, vehicleName).</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">address</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req optional">Optional</td>
+                    <td>Agent address</td>
+                </tr>
+                <tr>
+                    <td class="param-name">vehicleName</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req optional">Optional</td>
+                    <td>Vehicle name</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
+  "address": "123 Delivery Ln",
+  "vehicleName": "Toyota Corolla"
+}</pre>
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Profile updated successfully",
+  "agent": { ... }
+}</pre>
+                </div>
+            </div>
+        </div>
+    <div class="section-title">
+        Admin Services
+    </div>
+        <div class="endpoint-card" id="route-admin-signup">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                
+                <span class="endpoint-path">/api/v1/admin/signup</span>
+                <span class="endpoint-short-desc">Create admin</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Registers a new admin.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">email</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Email</td>
+                </tr>
+                <tr>
+                    <td class="param-name">password</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Password</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "email": "admin@example.com",
   "password": "pass"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "message": "Admin created"
-}</pre>
-                    </div>
-                </div>
             </div>
-            <div class="endpoint-card" id="route-admin-me">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/admin/auth/me</span>
-                    <span class="endpoint-short-desc">Get active admin</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Retrieves admin profile.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "info": { ... }
-}</pre>
-                    </div>
-                </div>
-            </div>
-            <div class="endpoint-card" id="route-admin-category">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/admin/category</span>
-                    <span class="endpoint-short-desc">Create category</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Creates a new category.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">name</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Category name</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
+                <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
+  "message": "Admin created"
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-admin-me">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/admin/auth/me</span>
+                <span class="endpoint-short-desc">Get active admin</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Retrieves admin profile.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "info": { ... }
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-admin-category">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/admin/category</span>
+                <span class="endpoint-short-desc">Create category</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Creates a new category.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">name</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Category name</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "name": "Camping"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Category created"
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-admin-category-get">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    
-                    <span class="endpoint-path">/api/v1/admin/category</span>
-                    <span class="endpoint-short-desc">Get categories</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets all categories.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+        </div>
+        <div class="endpoint-card" id="route-admin-category-get">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                
+                <span class="endpoint-path">/api/v1/admin/category</span>
+                <span class="endpoint-short-desc">Get categories</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets all categories.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "categories": []
 }</pre>
-                    </div>
                 </div>
             </div>
-
-            <div class="endpoint-card" id="route-admin-agents-orders">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/admin/agents/:agentId/orders</span>
-                    <span class="endpoint-short-desc">Get agent orders</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Retrieves all orders assigned to a specific delivery agent.</p>
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "message": "Agent orders fetched successfully",
-  "agent": {
-    "fullName": "John Doe",
-    "email": "agent@example.com",
-    "phoneNumber": "123456789"
-  },
-  "orders": [
-    {
-      "_id": "60d...",
-      "status": "Picked Up",
-      "deliveryType": "delivery"
-    }
-  ]
-}</pre>
-                    </div>
-                </div>
+        </div>
+    <div class="section-title">
+        Product Services
+    </div>
+        <div class="endpoint-card" id="route-public-products">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                
+                <span class="endpoint-path">/api/v1/products</span>
+                <span class="endpoint-short-desc">Get public products</span>
+                <span class="chevron-icon">▼</span>
             </div>
-            <div class="section-title">Product Services</div>
-            <div class="endpoint-card" id="route-public-products">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    
-                    <span class="endpoint-path">/api/v1/products</span>
-                    <span class="endpoint-short-desc">Get public products</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets all products with optional filters (search, category, etc).</p>
-                    
-                <div class="detail-title">Query Parameters</div>
-                <table class="params-table">
-                    <thead><tr><th>Parameter</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">search</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Search by product name</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">category</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Filter by category ID</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">is_flash_sale</td>
-                            <td class="param-type">boolean</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Filter flash sale items</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">is_recommended</td>
-                            <td class="param-type">boolean</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Filter recommended items</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">page</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Page number (default: 1)</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">limit</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Items per page (default: 10)</td>
-                        </tr>
-                    </tbody>
-                </table>
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            <div class="endpoint-details">
+                <p class="detail-description">Gets all products with optional filters (search, category, etc).</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "products": [],
   "totalProducts": 100
 }</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-public-products-id">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    
-                    <span class="endpoint-path">/api/v1/products/:id</span>
-                    <span class="endpoint-short-desc">Get product</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets a single product by ID.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "product": { ... }
-}</pre>
-                    </div>
-                </div>
+        </div>
+        <div class="endpoint-card" id="route-public-products-id">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                
+                <span class="endpoint-path">/api/v1/products/:id</span>
+                <span class="endpoint-short-desc">Get product</span>
+                <span class="chevron-icon">▼</span>
             </div>
-            <div class="endpoint-card" id="route-public-categories">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    
-                    <span class="endpoint-path">/api/v1/categories</span>
-                    <span class="endpoint-short-desc">Get categories</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets all public categories.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "categories": []
-}</pre>
-                    </div>
-                </div>
-            </div>
-            <div class="section-title">Review Services</div>
-            <div class="endpoint-card" id="route-reviews-get">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method get">GET</span>
-                    
-                    <span class="endpoint-path">/api/v1/reviews/products/:productId</span>
-                    <span class="endpoint-short-desc">Get product reviews</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Gets reviews for a specific product.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "reviews": []
-}</pre>
-                    </div>
-                </div>
-            </div>
-            <div class="endpoint-card" id="route-reviews-post">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method post">POST</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/reviews/products/:productId</span>
-                    <span class="endpoint-short-desc">Create review</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Adds a review for a product.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">rating</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req required">Required</td>
-                            <td>Rating 1-5</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">comment</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req required">Required</td>
-                            <td>Review text</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets a single product by ID.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
+  "product": { ... }
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-public-categories">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                
+                <span class="endpoint-path">/api/v1/categories</span>
+                <span class="endpoint-short-desc">Get categories</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets all public categories.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "categories": []
+}</pre>
+                </div>
+            </div>
+        </div>
+    <div class="section-title">
+        Review Services
+    </div>
+        <div class="endpoint-card" id="route-reviews-get">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                
+                <span class="endpoint-path">/api/v1/reviews/products/:productId</span>
+                <span class="endpoint-short-desc">Get product reviews</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets reviews for a specific product.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "reviews": []
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-reviews-post">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method post">POST</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/reviews/products/:productId</span>
+                <span class="endpoint-short-desc">Create review</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Adds a review for a product.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">rating</td>
+                    <td class="param-type">number</td>
+                    <td class="param-req required">Required</td>
+                    <td>Rating 1-5</td>
+                </tr>
+                <tr>
+                    <td class="param-name">comment</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>Review text</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
   "rating": 5,
   "comment": "Great!"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "message": "Review submitted"
-}</pre>
-                    </div>
-                </div>
             </div>
-            <div class="endpoint-card" id="route-reviews-put">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method put">PUT</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/reviews/:id</span>
-                    <span class="endpoint-short-desc">Update review</span>
-                    <span class="chevron-icon">▼</span>
-                </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Updates a user review.</p>
-                    
-                <div class="detail-title">Request Body Fields</div>
-                <table class="params-table">
-                    <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="param-name">rating</td>
-                            <td class="param-type">number</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Rating</td>
-                        </tr>
-                        <tr>
-                            <td class="param-name">comment</td>
-                            <td class="param-type">string</td>
-                            <td class="param-req optional">Optional</td>
-                            <td>Review text</td>
-                        </tr></tbody></table>
-                    
-                <div class="detail-title">Request Payload Example</div>
+                <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
-  "rating": 4
+  "message": "Review submitted"
 }</pre>
-                </div>
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
-  "message": "Review updated"
-}</pre>
-                    </div>
                 </div>
             </div>
-            <div class="endpoint-card" id="route-reviews-delete">
-                <div class="endpoint-header" onclick="toggleCard(this)">
-                    <span class="badge-method delete">DELETE</span>
-                    <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
-                    <span class="endpoint-path">/api/v1/reviews/:id</span>
-                    <span class="endpoint-short-desc">Delete review</span>
-                    <span class="chevron-icon">▼</span>
+        </div>
+        <div class="endpoint-card" id="route-reviews-put">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/reviews/:id</span>
+                <span class="endpoint-short-desc">Update review</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Updates a user review.</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">rating</td>
+                    <td class="param-type">number</td>
+                    <td class="param-req optional">Optional</td>
+                    <td>Rating</td>
+                </tr>
+                <tr>
+                    <td class="param-name">comment</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req optional">Optional</td>
+                    <td>Review text</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
+  "rating": 4
+}</pre>
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Review updated"
+}</pre>
                 </div>
-                <div class="endpoint-details">
-                    <p class="detail-description">Deletes a user review.</p>
-                    
-                    
-                    <div class="detail-title">Success Response Example</div>
-                    <div class="code-container">
-                        <pre class="code-block">{
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-reviews-delete">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method delete">DELETE</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/reviews/:id</span>
+                <span class="endpoint-short-desc">Delete review</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Deletes a user review.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
   "message": "Review deleted"
 }</pre>
-                    </div>
                 </div>
+            </div>
+        </div>
             </div>
         </main>
 

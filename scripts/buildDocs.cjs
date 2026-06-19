@@ -380,6 +380,33 @@ const endpoints = [
         payloadExample: `{\n  "deliveryStatus": "delivered"\n}`,
         successResponse: `{\n  "message": "Status updated"\n}`
     },
+    {
+        id: 'agent-toggle-online',
+        section: 'Agent Services',
+        method: 'PUT',
+        path: '/api/v1/agent/toggle-online',
+        shortDesc: 'Toggle online status',
+        isSecure: true,
+        description: 'Toggles the agent online/offline status.',
+        requestBody: [{ field: 'isOnline', type: 'boolean', requirement: 'Required', desc: 'Online status' }],
+        payloadExample: `{\n  "isOnline": true\n}`,
+        successResponse: `{\n  "message": "Agent is now online",\n  "isOnline": true\n}`
+    },
+    {
+        id: 'agent-profile',
+        section: 'Agent Services',
+        method: 'PUT',
+        path: '/api/v1/agent/profile',
+        shortDesc: 'Update agent profile',
+        isSecure: true,
+        description: 'Updates agent profile (address, vehicleName).',
+        requestBody: [
+            { field: 'address', type: 'string', requirement: 'Optional', desc: 'Agent address' },
+            { field: 'vehicleName', type: 'string', requirement: 'Optional', desc: 'Vehicle name' }
+        ],
+        payloadExample: `{\n  "address": "123 Delivery Ln",\n  "vehicleName": "Toyota Corolla"\n}`,
+        successResponse: `{\n  "message": "Profile updated successfully",\n  "agent": { ... }\n}`
+    },
 
     // --- ADMIN SERVICES ---
     {

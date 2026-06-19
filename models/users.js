@@ -49,6 +49,14 @@ const userSchema = new mongoose.Schema({
         enum: ["active", "suspended", "pending"],
         default: "active"
     },
+    isOnline: {
+        type: Boolean,
+        default: false // For agents
+    },
+    vehicleName: {
+        type: String,
+        required: false // For agents
+    },
     resetPasswordToken: String,
     resetPasswordExpires: Date
 }, { timestamps: true });
@@ -59,6 +67,10 @@ userSchema.set('toJSON', {
             delete ret.businessHours;
             delete ret.businessName;
             delete ret.storeDescription;
+        }
+        if (!['agent', 'deliveryAgent'].includes(ret.role)) {
+            delete ret.isOnline;
+            delete ret.vehicleName;
         }
         return ret;
     }

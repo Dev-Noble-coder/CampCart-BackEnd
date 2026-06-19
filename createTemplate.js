@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-let html = fs.readFileSync('old_index.html', 'utf8');
+let html = fs.readFileSync('index.html', 'utf8');
 
 // Replace nav sections
 const navStartStr = '<div class="nav-section">';
