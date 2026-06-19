@@ -20,7 +20,7 @@ export const getProducts = async (req, res) => {
         const activeVendors = await User.find({ 
             role: "vendor", 
             status: "active",
-            [`businessHours.${currentDay}.isOpen`]: { $ne: false },
+            [`businessHours.${currentDay}.isOpen`]: true,
             [`businessHours.${currentDay}.openTime`]: { $lte: currentTime },
             [`businessHours.${currentDay}.closeTime`]: { $gte: currentTime }
         }).select('_id');
