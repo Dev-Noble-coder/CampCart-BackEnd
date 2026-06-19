@@ -633,6 +633,51 @@ for (const sec of sections) {
     }
 }
 
+navHtml += `<a href="#section-websockets" class="nav-link" style="color: #f59e0b; font-weight: bold; margin-top: 1rem;">Real-Time WebSockets</a>`;
+
+cardsHtml += `
+    <div class="section-title" id="section-websockets">Real-Time WebSockets</div>
+    <div class="endpoint-card">
+        <div class="endpoint-header" onclick="toggleCard(this)">
+            <span class="badge-method" style="background-color: #f59e0b; color: #fff;">SOCKET</span>
+            <span class="endpoint-path">Socket.io Connection</span>
+            <span class="endpoint-short-desc">Agent Dispatching</span>
+            <span class="chevron-icon">▼</span>
+        </div>
+        <div class="endpoint-details">
+            <p class="detail-description">Real-time socket connection for agent dispatching. Clients must connect using Socket.io and join the active pool.</p>
+            
+            <div class="detail-title">Events to Emit (Client -> Server)</div>
+            <ul>
+                <li><code>join_online_agents</code>: Emitted by the frontend when an agent goes online. Places them in the active delivery pool.</li>
+            </ul>
+
+            <div class="detail-title">Events to Listen For (Server -> Client)</div>
+            <ul>
+                <li><code>new_delivery_request</code>: Fired when an order is ready for pickup and broadcasting to all online agents.</li>
+            </ul>
+            <div class="code-container">
+                <pre class="code-block">{
+  "orderId": "60d5ec...",
+  "pickupAddress": "Vendor Address",
+  "dropoffAddress": "Customer Address",
+  "earnings": 250,
+  "vendorName": "Store Name"
+}</pre>
+            </div>
+
+            <ul>
+                <li><code>remove_delivery_request</code>: Fired when an order is claimed by an agent. Used to dismiss the popup for runner-up agents.</li>
+            </ul>
+            <div class="code-container">
+                <pre class="code-block">{
+  "orderId": "60d5ec..."
+}</pre>
+            </div>
+        </div>
+    </div>
+`;
+
 const templatePath = path.join(__dirname, '../template.html');
 const outPath = path.join(__dirname, '../index.html');
 let html = fs.readFileSync(templatePath, 'utf8');
