@@ -76,12 +76,23 @@ export const updateOrderStatus = async (req, res) => {
             sendOrderStatusEmail(order.user.email, order._id, status);
         }
 
-        if (status === "Ready for Pickup" && order.deliveryType === "delivery") {
+        if (status === "Ready for Pickup" && order.type && order.type.toLowerCase() === "delivery") {
             const agents = await User.find({ role: "deliveryAgent" }).select("email");
             const agentEmails = agents.map(agent => agent.email);
             if (agentEmails.length > 0) {
                 const vendorName = order.vendor ? order.vendor.businessName : "CampCart Vendor";
                 sendNewDeliveryAvailableEmail(agentEmails, order._id, vendorName);
+            }
+
+            // Real-Time Socket Dispatch
+            if (req.io) {
+                req.io.to("online_agents").emit("new_delivery_request", {
+                    orderId: order._id,
+                    pickupAddress: order.vendor ? order.vendor.address : "Vendor Address",
+                    dropoffAddress: order.deliveryAddress,
+                    earnings: order.deliveryCharge || 0,
+                    vendorName: order.vendor ? order.vendor.businessName : "CampCart Vendor"
+                });
             }
         }
 

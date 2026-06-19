@@ -4,7 +4,7 @@ import { sendOrderStatusEmail } from "../../../lib/email.js";
 export const getAvailableOrders = async (req, res) => {
     try {
         // Find delivery orders that are ready for pickup but not yet assigned to an agent
-        const orders = await Order.find({ status: "Ready for Pickup", agent: { $exists: false }, deliveryType: "delivery" })
+        const orders = await Order.find({ status: "Ready for Pickup", agent: { $exists: false } })
             .populate("user", "fullName email phoneNumber address")
             .populate("vendor", "businessName address")
             .sort({ createdAt: 1 }); // Oldest first
@@ -28,13 +28,17 @@ export const acceptOrder = async (req, res) => {
         const { id } = req.params;
 
         const order = await Order.findOneAndUpdate(
-            { _id: id, status: "Ready for Pickup", agent: { $exists: false }, deliveryType: "delivery" },
-            { $set: { agent: agentid } },
+            { _id: id, status: "Ready for Pickup", agent: { $exists: false } },
+            { $set: { agent: agentid, status: "Agent_Assigned" } },
             { new: true, runValidators: true }
         );
 
         if (!order) {
-            return res.status(404).json({ message: "Order not found, or it has already been accepted by another agent." });
+            return res.status(409).json({ message: "Order has already been claimed by another agent or is no longer available." });
+        }
+
+        if (req.io) {
+            req.io.to("online_agents").emit("remove_delivery_request", { orderId: order._id });
         }
 
         res.status(200).json({
@@ -50,6 +54,33 @@ export const acceptOrder = async (req, res) => {
     }
 };
 
+export const rejectOrder = async (req, res) => {
+    try {
+        const agentid = req.user?._id || req.accessToken?.userID || req.accessToken?.id;
+        const { id } = req.params;
+
+        const order = await Order.findOneAndUpdate(
+            { _id: id },
+            { $addToSet: { rejectedBy: agentid } },
+            { new: true }
+        );
+
+        if (!order) {
+            return res.status(404).json({ message: "Order not found." });
+        }
+
+        res.status(200).json({
+            message: "Order rejected successfully"
+        });
+    } catch (error) {
+        console.error("Error rejecting order:", error);
+        res.status(500).json({
+            message: "An error occurred while rejecting the order",
+            error: error.message
+        });
+    }
+};
+
 export const getAssignedOrders = async (req, res) => {
     try {
         const agentid = req.user?._id || req.accessToken?.userID || req.accessToken?.id;
@@ -59,9 +90,27 @@ export const getAssignedOrders = async (req, res) => {
             .populate("vendor", "businessName address phoneNumber")
             .sort({ updatedAt: -1 });
 
+        const ongoingOrders = [];
+        const completedOrders = [];
+        let totalEarnings = 0;
+        let pendingEarnings = 0;
+
+        orders.forEach(order => {
+            if (order.status === "Delivered") {
+                completedOrders.push(order);
+                totalEarnings += order.deliveryCharge || 0;
+            } else {
+                ongoingOrders.push(order);
+                pendingEarnings += order.deliveryCharge || 0;
+            }
+        });
+
         res.status(200).json({
             message: "Assigned orders fetched successfully",
-            orders
+            ongoingOrders,
+            completedOrders,
+            totalEarnings,
+            pendingEarnings
         });
     } catch (error) {
         console.error("Error fetching assigned orders:", error);

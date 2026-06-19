@@ -1181,6 +1181,8 @@
 
             
             
+    
+    
     <div class="nav-section">
         <div class="nav-section-title">Authentication</div>
         <a href="#route-user-signup" class="nav-link" onclick="setActiveLink(this)">
@@ -1309,6 +1311,10 @@
             PUT /api/v1/agent/orders/:id/accept
             <span class="badge put">PUT</span>
         </a>
+        <a href="#route-agent-orders-reject" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/agent/orders/:id/reject
+            <span class="badge put">PUT</span>
+        </a>
         <a href="#route-agent-orders-assigned" class="nav-link" onclick="setActiveLink(this)">
             GET /api/v1/agent/orders/assigned
             <span class="badge get">GET</span>
@@ -1431,6 +1437,16 @@
             
             <div class="section-title">Authentication</div>
             <div id="endpoints-container">
+                
+    <div class="section-title">
+        Authentication
+    </div>
+        <div id="endpoints-container">
+                
+    <div class="section-title">
+        Authentication
+    </div>
+        <div id="endpoints-container">
                 
     <div class="section-title">
         Authentication
@@ -2328,6 +2344,26 @@
                 </div>
             </div>
         </div>
+        <div class="endpoint-card" id="route-agent-orders-reject">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/agent/orders/:id/reject</span>
+                <span class="endpoint-short-desc">Reject order</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Agent rejects an order, preventing them from being pinged again for this specific order.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Order rejected successfully"
+}</pre>
+                </div>
+            </div>
+        </div>
         <div class="endpoint-card" id="route-agent-orders-assigned">
             <div class="endpoint-header" onclick="toggleCard(this)">
                 <span class="badge-method get">GET</span>
@@ -2343,7 +2379,11 @@
                 <div class="detail-title">Success Response Example</div>
                 <div class="code-container">
                     <pre class="code-block">{
-  "orders": []
+  "message": "Assigned orders fetched successfully",
+  "ongoingOrders": [],
+  "completedOrders": [],
+  "totalEarnings": 0,
+  "pendingEarnings": 0
 }</pre>
                 </div>
             </div>

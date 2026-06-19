@@ -359,6 +359,16 @@ const endpoints = [
         successResponse: `{\n  "message": "Order accepted"\n}`
     },
     {
+        id: 'agent-orders-reject',
+        section: 'Agent Services',
+        method: 'PUT',
+        path: '/api/v1/agent/orders/:id/reject',
+        shortDesc: 'Reject order',
+        isSecure: true,
+        description: 'Agent rejects an order, preventing them from being pinged again for this specific order.',
+        successResponse: `{\n  "message": "Order rejected successfully"\n}`
+    },
+    {
         id: 'agent-orders-assigned',
         section: 'Agent Services',
         method: 'GET',
@@ -366,7 +376,7 @@ const endpoints = [
         shortDesc: 'Get assigned orders',
         isSecure: true,
         description: 'Gets orders assigned to the agent.',
-        successResponse: `{\n  "orders": []\n}`
+        successResponse: `{\n  "message": "Assigned orders fetched successfully",\n  "ongoingOrders": [],\n  "completedOrders": [],\n  "totalEarnings": 0,\n  "pendingEarnings": 0\n}`
     },
     {
         id: 'agent-orders-status',

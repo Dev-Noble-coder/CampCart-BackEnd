@@ -55,7 +55,7 @@ const orderSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["Pending", "Processing", "Ready for Pickup", "Picked Up", "On the Way", "Delivered"],
+        enum: ["Pending", "Processing", "Ready for Pickup", "Picked Up", "On the Way", "Delivered", "Agent_Assigned"],
         default: "Pending"
     },
     vendor: {
@@ -68,6 +68,10 @@ const orderSchema = new mongoose.Schema({
         ref: "users",
         required: false // assigned delivery agent
     },
+    rejectedBy: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users"
+    }],
     type: {
         type: String,
         enum: ["pickup", "delivery", "Pickup", "Delivery"],
