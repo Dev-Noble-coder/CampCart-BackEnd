@@ -66,7 +66,7 @@ export const updateOrderStatus = async (req, res) => {
             { _id: id, vendor: userid },
             { $set: { status } },
             { new: true, runValidators: true }
-        ).populate("user", "email").populate("vendor", "businessName");
+        ).populate("user", "fullName email phoneNumber address").populate("vendor", "businessName address");
 
         if (!order) {
             return res.status(404).json({ message: "Order not found or access denied." });
@@ -87,6 +87,7 @@ export const updateOrderStatus = async (req, res) => {
             // Real-Time Socket Dispatch
             if (req.io) {
                 req.io.to("online_agents").emit("new_delivery_request", {
+                    order: order, // The full order object, exactly like what the /available endpoint returns!
                     orderId: order._id,
                     pickupAddress: order.vendor ? order.vendor.address : "Vendor Address",
                     dropoffAddress: order.deliveryAddress,

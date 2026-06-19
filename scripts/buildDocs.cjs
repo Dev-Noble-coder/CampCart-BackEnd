@@ -658,6 +658,13 @@ cardsHtml += `
             </ul>
             <div class="code-container">
                 <pre class="code-block">{
+  "order": {
+    "_id": "60d5ec...",
+    "user": { "fullName": "John", "email": "..." },
+    "vendor": { "businessName": "Store" },
+    "items": [...],
+    "status": "Ready for Pickup"
+  },
   "orderId": "60d5ec...",
   "pickupAddress": "Vendor Address",
   "dropoffAddress": "Customer Address",
