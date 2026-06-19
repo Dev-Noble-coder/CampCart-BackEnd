@@ -9,7 +9,14 @@ export const getProducts = async (req, res) => {
     try {
         const { search, category, is_flash_sale, is_recommended, page = 1, limit = 10 } = req.query;
 
-        const activeVendors = await User.find({ role: "vendor", status: "active" }).select('_id');
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const currentDay = days[new Date().getDay()];
+
+        const activeVendors = await User.find({ 
+            role: "vendor", 
+            status: "active",
+            [`businessHours.${currentDay}.isOpen`]: { $ne: false }
+        }).select('_id');
         const activeVendorIds = activeVendors.map(v => v._id);
 
         let query = { vendor: { $in: activeVendorIds } };
