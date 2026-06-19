@@ -9,13 +9,20 @@ export const getProducts = async (req, res) => {
     try {
         const { search, category, is_flash_sale, is_recommended, page = 1, limit = 10 } = req.query;
 
+        const now = new Date();
         const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-        const currentDay = days[new Date().getDay()];
+        const currentDay = days[now.getDay()];
+
+        const currentHours = String(now.getHours()).padStart(2, '0');
+        const currentMinutes = String(now.getMinutes()).padStart(2, '0');
+        const currentTime = `${currentHours}:${currentMinutes}`;
 
         const activeVendors = await User.find({ 
             role: "vendor", 
             status: "active",
-            [`businessHours.${currentDay}.isOpen`]: { $ne: false }
+            [`businessHours.${currentDay}.isOpen`]: { $ne: false },
+            [`businessHours.${currentDay}.openTime`]: { $lte: currentTime },
+            [`businessHours.${currentDay}.closeTime`]: { $gte: currentTime }
         }).select('_id');
         const activeVendorIds = activeVendors.map(v => v._id);
 
