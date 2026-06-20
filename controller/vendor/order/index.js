@@ -109,3 +109,44 @@ export const updateOrderStatus = async (req, res) => {
         });
     }
 };
+
+export const getRecentOrders = async (req, res) => {
+    try {
+        const userid = req.user?._id || req.accessToken?.userID || req.accessToken?.id;
+
+        const orders = await Order.find({ vendor: userid })
+            .populate("user", "fullName email")
+            .populate("items.product", "name")
+            .sort({ createdAt: -1 })
+            .limit(3);
+
+        const recentOrders = orders.map(o => {
+            const timeDiff = Math.abs(new Date() - new Date(o.createdAt));
+            const minutes = Math.floor(timeDiff / (1000 * 60));
+            const hours = Math.floor(minutes / 60);
+            let timeString = `${minutes} mins ago`;
+            if (hours > 0) timeString = `${hours} hr${hours > 1 ? 's' : ''} ago`;
+            if (hours >= 24) {
+                const days = Math.floor(hours / 24);
+                timeString = `${days} day${days > 1 ? 's' : ''} ago`;
+            }
+
+            return {
+                id: o._id,
+                name: o.user ? o.user.fullName : "Unknown Buyer",
+                item: o.items && o.items.length > 0 && o.items[0].product ? o.items[0].product.name : "Unknown Item",
+                status: o.status,
+                time: timeString,
+                avatar: ""
+            };
+        });
+
+        res.status(200).json(recentOrders);
+    } catch (error) {
+        console.error("Error fetching recent orders:", error);
+        res.status(500).json({
+            message: "An error occurred",
+            error: error.message
+        });
+    }
+};

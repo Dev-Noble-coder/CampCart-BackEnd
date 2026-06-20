@@ -1185,6 +1185,7 @@
     
     
     
+    
     <div class="nav-section">
         <div class="nav-section-title">Authentication</div>
         <a href="#route-user-signup" class="nav-link" onclick="setActiveLink(this)">
@@ -1293,6 +1294,22 @@
         </a>
         <a href="#route-vendor-dashboard" class="nav-link" onclick="setActiveLink(this)">
             GET /api/v1/vendor/dashboard
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-dashboard-insights" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/dashboard/insights
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-orders-recent" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/orders/recent
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-wallet" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/wallet
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-vendor-inventory-insights" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/vendor/inventory/insights
             <span class="badge get">GET</span>
         </a></div>
     <div class="nav-section">
@@ -1439,6 +1456,11 @@
             
             <div class="section-title">Authentication</div>
             <div id="endpoints-container">
+                
+    <div class="section-title">
+        Authentication
+    </div>
+        <div id="endpoints-container">
                 
     <div class="section-title">
         Authentication
@@ -2239,6 +2261,120 @@
                 <div class="code-container">
                     <pre class="code-block">{
   "stats": { "totalSales": 1000 }
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-vendor-dashboard-insights">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/dashboard/insights</span>
+                <span class="endpoint-short-desc">Get dashboard insights</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets overview metrics and top products for the dashboard.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "metrics": {
+    "totalRevenue": 124500,
+    "activeOrders": 12,
+    "totalInventory": 45
+  },
+  "topProducts": [
+    { 
+      "id": "...", 
+      "name": "...", 
+      "price": 1500, 
+      "sales": 124, 
+      "image": "..." 
+    }
+  ]
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-vendor-orders-recent">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/orders/recent</span>
+                <span class="endpoint-short-desc">Get recent orders</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets recent orders formatted for dashboard display.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">[
+  {
+    "id": "...",
+    "name": "Sarah Williams",
+    "item": "Jollof Rice Pack",
+    "status": "Delivered",
+    "time": "10 mins ago",
+    "avatar": ""
+  }
+]</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-vendor-wallet">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/wallet</span>
+                <span class="endpoint-short-desc">Get vendor wallet</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets wallet balance.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "wallet": {
+    "availableBalance": 124500.00
+  },
+  "history": []
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-vendor-inventory-insights">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/vendor/inventory/insights</span>
+                <span class="endpoint-short-desc">Get inventory insights</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets quick stats, revenue chart data, and top selling units for the inventory page.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "quickStats": {
+    "totalRevenue": 845200,
+    "unitsSold": 1204
+  },
+  "chartData": {
+    "Today": [
+      { "day": "6AM", "amount": "₦ 5k", "height": 10 }
+    ]
+  },
+  "topSellingUnits": [
+    { "name": "Fresh Tomatoes", "sold": 450, "color": "bg-orange-500" }
+  ]
 }</pre>
                 </div>
             </div>

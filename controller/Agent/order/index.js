@@ -1,5 +1,6 @@
 import Order from "../../../models/order.js";
 import { sendOrderStatusEmail } from "../../../lib/email.js";
+import Product from "../../../models/product.js";
 
 export const getAvailableOrders = async (req, res) => {
     try {
@@ -145,6 +146,14 @@ export const updateDeliveryStatus = async (req, res) => {
 
         if (order.user && order.user.email) {
             sendOrderStatusEmail(order.user.email, order._id, status);
+        }
+
+        if (status === "Delivered" && order.items && order.items.length > 0) {
+            for (const item of order.items) {
+                if (item.product) {
+                    await Product.findByIdAndUpdate(item.product, { $inc: { sales: item.quantity } }).catch(err => console.error("Failed to update product sales", err));
+                }
+            }
         }
 
         res.status(200).json({

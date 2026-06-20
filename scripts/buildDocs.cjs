@@ -310,6 +310,46 @@ const endpoints = [
         description: 'Gets vendor dashboard statistics.',
         successResponse: `{\n  "stats": { "totalSales": 1000 }\n}`
     },
+    {
+        id: 'vendor-dashboard-insights',
+        section: 'Vendor Services',
+        method: 'GET',
+        path: '/api/v1/vendor/dashboard/insights',
+        shortDesc: 'Get dashboard insights',
+        isSecure: true,
+        description: 'Gets overview metrics and top products for the dashboard.',
+        successResponse: `{\n  "metrics": {\n    "totalRevenue": 124500,\n    "activeOrders": 12,\n    "totalInventory": 45\n  },\n  "topProducts": [\n    { \n      "id": "...", \n      "name": "...", \n      "price": 1500, \n      "sales": 124, \n      "image": "..." \n    }\n  ]\n}`
+    },
+    {
+        id: 'vendor-orders-recent',
+        section: 'Vendor Services',
+        method: 'GET',
+        path: '/api/v1/vendor/orders/recent',
+        shortDesc: 'Get recent orders',
+        isSecure: true,
+        description: 'Gets recent orders formatted for dashboard display.',
+        successResponse: `[\n  {\n    "id": "...",\n    "name": "Sarah Williams",\n    "item": "Jollof Rice Pack",\n    "status": "Delivered",\n    "time": "10 mins ago",\n    "avatar": ""\n  }\n]`
+    },
+    {
+        id: 'vendor-wallet',
+        section: 'Vendor Services',
+        method: 'GET',
+        path: '/api/v1/vendor/wallet',
+        shortDesc: 'Get vendor wallet',
+        isSecure: true,
+        description: 'Gets wallet balance.',
+        successResponse: `{\n  "wallet": {\n    "availableBalance": 124500.00\n  },\n  "history": []\n}`
+    },
+    {
+        id: 'vendor-inventory-insights',
+        section: 'Vendor Services',
+        method: 'GET',
+        path: '/api/v1/vendor/inventory/insights',
+        shortDesc: 'Get inventory insights',
+        isSecure: true,
+        description: 'Gets quick stats, revenue chart data, and top selling units for the inventory page.',
+        successResponse: `{\n  "quickStats": {\n    "totalRevenue": 845200,\n    "unitsSold": 1204\n  },\n  "chartData": {\n    "Today": [\n      { "day": "6AM", "amount": "₦ 5k", "height": 10 }\n    ]\n  },\n  "topSellingUnits": [\n    { "name": "Fresh Tomatoes", "sold": 450, "color": "bg-orange-500" }\n  ]\n}`
+    },
 
     // --- AGENT SERVICES ---
     {
