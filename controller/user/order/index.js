@@ -140,7 +140,7 @@ export const getUserOrders = async (req, res) => {
 
         const formattedOrders = orders.map(o => {
             if (!o.agent) {
-                o.agent = "Agent is yet to collect";
+                o.agent = (o.type && o.type.toLowerCase() === "delivery") ? "Agent is yet to collect" : "Pickup Order";
             }
             return o;
         });
@@ -174,7 +174,7 @@ export const getOrderById = async (req, res) => {
         }
 
         if (!order.agent) {
-            order.agent = "Agent is yet to collect";
+            order.agent = (order.type && order.type.toLowerCase() === "delivery") ? "Agent is yet to collect" : "Pickup Order";
         }
 
         res.status(200).json({

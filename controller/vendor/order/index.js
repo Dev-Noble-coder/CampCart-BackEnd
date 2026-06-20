@@ -9,11 +9,20 @@ export const getVendorOrders = async (req, res) => {
         const orders = await Order.find({ vendor: userid })
             .populate("user", "fullName email phoneNumber")
             .populate("items.product", "name price images")
-            .sort({ createdAt: -1 });
+            .populate("agent", "fullName phoneNumber")
+            .sort({ createdAt: -1 })
+            .lean();
+
+        const formattedOrders = orders.map(o => {
+            if (!o.agent) {
+                o.agent = (o.type && o.type.toLowerCase() === "delivery") ? "Agent is yet to collect" : "Pickup Order";
+            }
+            return o;
+        });
 
         res.status(200).json({
             message: "Orders fetched successfully",
-            orders
+            orders: formattedOrders
         });
     } catch (error) {
         console.error("Error fetching vendor orders:", error);
@@ -31,10 +40,16 @@ export const getOrderById = async (req, res) => {
 
         const order = await Order.findOne({ _id: id, vendor: userid })
             .populate("user", "fullName email phoneNumber address")
-            .populate("items.product", "name price images category");
+            .populate("items.product", "name price images category")
+            .populate("agent", "fullName phoneNumber")
+            .lean();
 
         if (!order) {
             return res.status(404).json({ message: "Order not found or access denied." });
+        }
+
+        if (!order.agent) {
+            order.agent = (order.type && order.type.toLowerCase() === "delivery") ? "Agent is yet to collect" : "Pickup Order";
         }
 
         res.status(200).json({
