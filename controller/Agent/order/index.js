@@ -32,7 +32,7 @@ export const acceptOrder = async (req, res) => {
             { _id: id, status: "Ready for Pickup", agent: { $exists: false } },
             { $set: { agent: agentid, status: "Agent_Assigned" } },
             { new: true, runValidators: true }
-        ).populate("user", "fullName email phoneNumber").populate("agent", "fullName phoneNumber");
+        ).populate("user", "fullName email phoneNumber").populate("agent", "fullName phoneNumber").populate("vendor", "businessName address").populate("items.product", "name price");
 
         if (!order) {
             return res.status(409).json({ message: "Order has already been claimed by another agent or is no longer available." });
@@ -43,8 +43,7 @@ export const acceptOrder = async (req, res) => {
         }
 
         if (order.user && order.user.email) {
-            const agentDetails = order.agent ? { name: order.agent.fullName, phone: order.agent.phoneNumber } : null;
-            sendOrderStatusEmail(order.user.email, order._id, "Agent_Assigned", agentDetails);
+            sendOrderStatusEmail(order);
         }
 
         res.status(200).json({
@@ -143,15 +142,14 @@ export const updateDeliveryStatus = async (req, res) => {
             { _id: id, agent: agentid },
             { $set: { status } },
             { new: true, runValidators: true }
-        ).populate("user", "fullName email phoneNumber").populate("agent", "fullName phoneNumber");
+        ).populate("user", "fullName email phoneNumber").populate("agent", "fullName phoneNumber").populate("vendor", "businessName address").populate("items.product", "name price");
 
         if (!order) {
             return res.status(404).json({ message: "Order not found or access denied." });
         }
 
         if (order.user && order.user.email) {
-            const agentDetails = order.agent ? { name: order.agent.fullName, phone: order.agent.phoneNumber } : null;
-            sendOrderStatusEmail(order.user.email, order._id, status, agentDetails);
+            sendOrderStatusEmail(order);
         }
 
         if (status === "Delivered" && order.items && order.items.length > 0) {

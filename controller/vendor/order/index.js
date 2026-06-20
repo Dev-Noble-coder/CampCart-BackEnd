@@ -66,14 +66,14 @@ export const updateOrderStatus = async (req, res) => {
             { _id: id, vendor: userid },
             { $set: { status } },
             { new: true, runValidators: true }
-        ).populate("user", "fullName email phoneNumber address").populate("vendor", "businessName address");
+        ).populate("user", "fullName email phoneNumber address").populate("vendor", "businessName address").populate("items.product", "name price");
 
         if (!order) {
             return res.status(404).json({ message: "Order not found or access denied." });
         }
 
         if (order.user && order.user.email) {
-            sendOrderStatusEmail(order.user.email, order._id, status);
+            sendOrderStatusEmail(order);
         }
 
         if (status === "Ready for Pickup" && order.type && order.type.toLowerCase() === "delivery") {
