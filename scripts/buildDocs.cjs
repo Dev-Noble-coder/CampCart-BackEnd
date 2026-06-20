@@ -449,12 +449,13 @@ const endpoints = [
         path: '/api/v1/agent/profile',
         shortDesc: 'Update agent profile',
         isSecure: true,
-        description: 'Updates agent profile (address, vehicleName).',
+        description: 'Updates agent profile (address, vehicleName, phoneNumber).',
         requestBody: [
             { field: 'address', type: 'string', requirement: 'Optional', desc: 'Agent address' },
-            { field: 'vehicleName', type: 'string', requirement: 'Optional', desc: 'Vehicle name' }
+            { field: 'vehicleName', type: 'string', requirement: 'Optional', desc: 'Vehicle name' },
+            { field: 'phoneNumber', type: 'string', requirement: 'Optional', desc: 'Phone number' }
         ],
-        payloadExample: `{\n  "address": "123 Delivery Ln",\n  "vehicleName": "Toyota Corolla"\n}`,
+        payloadExample: `{\n  "address": "123 Delivery Ln",\n  "vehicleName": "Toyota Corolla",\n  "phoneNumber": "08012345678"\n}`,
         successResponse: `{\n  "message": "Profile updated successfully",\n  "agent": { ... }\n}`
     },
 

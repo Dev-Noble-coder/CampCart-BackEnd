@@ -36,11 +36,12 @@ export const toggleOnlineStatus = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const userid = req.accessToken.userID || req.accessToken.id;
-        const { address, vehicleName } = req.body;
+        const { address, vehicleName, phoneNumber } = req.body;
 
         const updateData = {};
         if (address !== undefined) updateData.address = address;
         if (vehicleName !== undefined) updateData.vehicleName = vehicleName;
+        if (phoneNumber !== undefined) updateData.phoneNumber = phoneNumber;
 
         if (Object.keys(updateData).length === 0) {
             return res.status(400).json({ message: "No valid fields provided for update." });

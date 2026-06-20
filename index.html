@@ -2618,7 +2618,7 @@
                 <span class="chevron-icon">▼</span>
             </div>
             <div class="endpoint-details">
-                <p class="detail-description">Updates agent profile (address, vehicleName).</p>
+                <p class="detail-description">Updates agent profile (address, vehicleName, phoneNumber).</p>
                 
             <div class="detail-title">Request Body Fields</div>
             <table class="params-table">
@@ -2635,13 +2635,20 @@
                     <td class="param-type">string</td>
                     <td class="param-req optional">Optional</td>
                     <td>Vehicle name</td>
+                </tr>
+                <tr>
+                    <td class="param-name">phoneNumber</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req optional">Optional</td>
+                    <td>Phone number</td>
                 </tr></tbody></table>
                 
             <div class="detail-title">Request Payload Example</div>
             <div class="code-container">
                 <pre class="code-block">{
   "address": "123 Delivery Ln",
-  "vehicleName": "Toyota Corolla"
+  "vehicleName": "Toyota Corolla",
+  "phoneNumber": "08012345678"
 }</pre>
             </div>
                 <div class="detail-title">Success Response Example</div>
