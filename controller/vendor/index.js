@@ -17,6 +17,7 @@ router.put("/products/:id", authorization, checkRole(["vendor"]), updateProduct)
 router.delete("/products/:id", authorization, checkRole(["vendor"]), deleteProduct);
 
 router.get("/orders", authorization, checkRole(["vendor"]), getVendorOrders);
+router.get("/orders/recent", authorization, checkRole(["vendor"]), getRecentOrders);
 router.get("/orders/:id", authorization, checkRole(["vendor"]), getVendorOrderById);
 router.put("/orders/:id/status", authorization, checkRole(["vendor"]), updateOrderStatus);
 
@@ -27,6 +28,5 @@ router.get("/dashboard", authorization, checkRole(["vendor"]), getVendorDashboar
 router.get("/dashboard/insights", authorization, checkRole(["vendor"]), getVendorDashboardInsights);
 router.get("/wallet", authorization, checkRole(["vendor"]), getVendorWallet);
 router.get("/inventory/insights", authorization, checkRole(["vendor"]), getVendorInventoryInsights);
-router.get("/orders/recent", authorization, checkRole(["vendor"]), getRecentOrders);
 
 export default router;

@@ -79,7 +79,7 @@ export const getVendorDashboardInsights = async (req, res) => {
         const userid = req.user?._id || req.accessToken?.userID || req.accessToken?.id;
 
         const orders = await Order.find({ vendor: userid });
-        const activeOrders = orders.filter(o => ["Pending", "Processing", "Ready for Pickup"].includes(o.status)).length;
+        const activeOrders = orders.filter(o => o.status !== "Delivered" && o.status !== "Cancelled").length;
         
         let totalRevenue = 0;
         orders.forEach(o => {
@@ -91,7 +91,7 @@ export const getVendorDashboardInsights = async (req, res) => {
         });
 
         const products = await Product.find({ vendor: userid });
-        const totalInventory = products.reduce((sum, p) => sum + p.stock, 0);
+        const totalInventory = products.length;
 
         const topProducts = await Product.find({ vendor: userid })
             .sort({ sales: -1 })
