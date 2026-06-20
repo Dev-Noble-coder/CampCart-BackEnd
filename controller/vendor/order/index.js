@@ -115,7 +115,7 @@ export const getRecentOrders = async (req, res) => {
         const userid = req.user?._id || req.accessToken?.userID || req.accessToken?.id;
 
         const orders = await Order.find({ vendor: userid })
-            .populate("user", "fullName email")
+            .populate("user", "fullName email phoneNumber")
             .populate("items.product", "name")
             .sort({ createdAt: -1 })
             .limit(3);
