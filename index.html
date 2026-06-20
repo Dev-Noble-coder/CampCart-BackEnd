@@ -1367,6 +1367,30 @@
         <a href="#route-admin-category-get" class="nav-link" onclick="setActiveLink(this)">
             GET /api/v1/admin/category
             <span class="badge get">GET</span>
+        </a>
+        <a href="#route-admin-dashboard-insights" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/admin/dashboard/insights
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-admin-users-list" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/admin/users?role=vendor&page=1&limit=10
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-admin-user-status" class="nav-link" onclick="setActiveLink(this)">
+            PUT /api/v1/admin/users/:id/status
+            <span class="badge put">PUT</span>
+        </a>
+        <a href="#route-admin-platform-orders" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/admin/orders?page=1&limit=10&status=Pending
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-admin-platform-products" class="nav-link" onclick="setActiveLink(this)">
+            GET /api/v1/admin/products?page=1&limit=10
+            <span class="badge get">GET</span>
+        </a>
+        <a href="#route-admin-product-delete" class="nav-link" onclick="setActiveLink(this)">
+            DELETE /api/v1/admin/products/:id
+            <span class="badge delete">DELETE</span>
         </a></div>
     <div class="nav-section">
         <div class="nav-section-title">Product Services</div>
@@ -2778,6 +2802,155 @@
                 <div class="code-container">
                     <pre class="code-block">{
   "categories": []
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-admin-dashboard-insights">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/admin/dashboard/insights</span>
+                <span class="endpoint-short-desc">Get platform insights</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets platform-wide statistics for the admin dashboard.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Platform insights fetched successfully",
+  "insights": { "totalUsers": 10, "totalVendors": 5, "totalAgents": 2, "activeOrders": 3, "totalRevenue": 45000 }
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-admin-users-list">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/admin/users?role=vendor&page=1&limit=10</span>
+                <span class="endpoint-short-desc">Get users list</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets paginated list of users, filterable by role (user, vendor, agent) and searchable by name/email/businessName.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Users fetched successfully",
+  "users": [],
+  "total": 5,
+  "totalPages": 1,
+  "currentPage": 1
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-admin-user-status">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method put">PUT</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/admin/users/:id/status</span>
+                <span class="endpoint-short-desc">Update user status</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Updates a user status (e.g. active, suspended).</p>
+                
+            <div class="detail-title">Request Body Fields</div>
+            <table class="params-table">
+                <thead><tr><th>Field</th><th>Type</th><th>Requirement</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="param-name">status</td>
+                    <td class="param-type">string</td>
+                    <td class="param-req required">Required</td>
+                    <td>User status</td>
+                </tr></tbody></table>
+                
+            <div class="detail-title">Request Payload Example</div>
+            <div class="code-container">
+                <pre class="code-block">{
+  "status": "suspended"
+}</pre>
+            </div>
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "User status updated to suspended successfully."
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-admin-platform-orders">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/admin/orders?page=1&limit=10&status=Pending</span>
+                <span class="endpoint-short-desc">Get platform orders</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets paginated list of all orders across the platform.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Orders fetched successfully",
+  "orders": [],
+  "total": 12,
+  "totalPages": 2,
+  "currentPage": 1
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-admin-platform-products">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method get">GET</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/admin/products?page=1&limit=10</span>
+                <span class="endpoint-short-desc">Get platform products</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Gets paginated list of all products across the platform.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Products fetched successfully",
+  "products": [],
+  "total": 50,
+  "totalPages": 5,
+  "currentPage": 1
+}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="endpoint-card" id="route-admin-product-delete">
+            <div class="endpoint-header" onclick="toggleCard(this)">
+                <span class="badge-method delete">DELETE</span>
+                <span class="badge-method auth-tag" style="background-color: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">SECURE</span>
+                <span class="endpoint-path">/api/v1/admin/products/:id</span>
+                <span class="endpoint-short-desc">Delete platform product</span>
+                <span class="chevron-icon">▼</span>
+            </div>
+            <div class="endpoint-details">
+                <p class="detail-description">Allows admin to delete any product.</p>
+                
+                
+                <div class="detail-title">Success Response Example</div>
+                <div class="code-container">
+                    <pre class="code-block">{
+  "message": "Product deleted successfully."
 }</pre>
                 </div>
             </div>

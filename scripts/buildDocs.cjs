@@ -509,6 +509,68 @@ const endpoints = [
         description: 'Gets all categories.',
         successResponse: `{\n  "categories": []\n}`
     },
+    {
+        id: 'admin-dashboard-insights',
+        section: 'Admin Services',
+        method: 'GET',
+        path: '/api/v1/admin/dashboard/insights',
+        shortDesc: 'Get platform insights',
+        isSecure: true,
+        description: 'Gets platform-wide statistics for the admin dashboard.',
+        successResponse: `{\n  "message": "Platform insights fetched successfully",\n  "insights": { "totalUsers": 10, "totalVendors": 5, "totalAgents": 2, "activeOrders": 3, "totalRevenue": 45000 }\n}`
+    },
+    {
+        id: 'admin-users-list',
+        section: 'Admin Services',
+        method: 'GET',
+        path: '/api/v1/admin/users?role=vendor&page=1&limit=10',
+        shortDesc: 'Get users list',
+        isSecure: true,
+        description: 'Gets paginated list of users, filterable by role (user, vendor, agent) and searchable by name/email/businessName.',
+        successResponse: `{\n  "message": "Users fetched successfully",\n  "users": [],\n  "total": 5,\n  "totalPages": 1,\n  "currentPage": 1\n}`
+    },
+    {
+        id: 'admin-user-status',
+        section: 'Admin Services',
+        method: 'PUT',
+        path: '/api/v1/admin/users/:id/status',
+        shortDesc: 'Update user status',
+        isSecure: true,
+        description: 'Updates a user status (e.g. active, suspended).',
+        requestBody: [{ field: 'status', type: 'string', requirement: 'Required', desc: 'User status' }],
+        payloadExample: `{\n  "status": "suspended"\n}`,
+        successResponse: `{\n  "message": "User status updated to suspended successfully."\n}`
+    },
+    {
+        id: 'admin-platform-orders',
+        section: 'Admin Services',
+        method: 'GET',
+        path: '/api/v1/admin/orders?page=1&limit=10&status=Pending',
+        shortDesc: 'Get platform orders',
+        isSecure: true,
+        description: 'Gets paginated list of all orders across the platform.',
+        successResponse: `{\n  "message": "Orders fetched successfully",\n  "orders": [],\n  "total": 12,\n  "totalPages": 2,\n  "currentPage": 1\n}`
+    },
+    {
+        id: 'admin-platform-products',
+        section: 'Admin Services',
+        method: 'GET',
+        path: '/api/v1/admin/products?page=1&limit=10',
+        shortDesc: 'Get platform products',
+        isSecure: true,
+        description: 'Gets paginated list of all products across the platform.',
+        successResponse: `{\n  "message": "Products fetched successfully",\n  "products": [],\n  "total": 50,\n  "totalPages": 5,\n  "currentPage": 1\n}`
+    },
+    {
+        id: 'admin-product-delete',
+        section: 'Admin Services',
+        method: 'DELETE',
+        path: '/api/v1/admin/products/:id',
+        shortDesc: 'Delete platform product',
+        isSecure: true,
+        description: 'Allows admin to delete any product.',
+        successResponse: `{\n  "message": "Product deleted successfully."\n}`
+    },
 
     // --- PUBLIC PRODUCT SERVICES ---
     {
