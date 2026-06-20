@@ -134,11 +134,20 @@ export const getUserOrders = async (req, res) => {
         const orders = await Order.find({ user: userid })
             .populate("items.product", "name images price")
             .populate("vendor", "businessName fullName address role")
-            .sort({ createdAt: -1 });
+            .populate("agent", "fullName phoneNumber")
+            .sort({ createdAt: -1 })
+            .lean();
+
+        const formattedOrders = orders.map(o => {
+            if (!o.agent) {
+                o.agent = "Agent is yet to collect";
+            }
+            return o;
+        });
 
         res.status(200).json({
             message: "Orders fetched successfully",
-            orders
+            orders: formattedOrders
         });
     } catch (error) {
         console.error("Error fetching orders:", error);
@@ -156,10 +165,16 @@ export const getOrderById = async (req, res) => {
 
         const order = await Order.findOne({ _id: id, user: userid })
             .populate("items.product", "name description images price category")
-            .populate("vendor", "businessName fullName address role");
+            .populate("vendor", "businessName fullName address role")
+            .populate("agent", "fullName phoneNumber")
+            .lean();
 
         if (!order) {
             return res.status(404).json({ message: "Order not found" });
+        }
+
+        if (!order.agent) {
+            order.agent = "Agent is yet to collect";
         }
 
         res.status(200).json({
