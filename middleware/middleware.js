@@ -3,7 +3,7 @@ import User from "../models/users.js";
 
 const authorization = async (req, res, next) => {
     try {
-        const accessToken = req.cookies?.Accesstoken || req.cookies?.accessToken
+        const accessToken = req.cookies?.Accesstoken || req.cookies?.accessToken || req.header('Authorization')?.replace('Bearer ', '');
         if (!accessToken) {
             return res.status(401).json({
                 message: "No access token"
