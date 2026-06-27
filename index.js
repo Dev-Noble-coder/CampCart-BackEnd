@@ -66,6 +66,11 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(process.cwd(), "index.html"));
 });
 
+// Health check endpoint for Uptime Robot
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: "ok", message: "Server is healthy", timestamp: new Date().toISOString() });
+});
+
 app.use("/api/v1", userRoutes);
 app.use("/api/v1/vendor", vendorRoutes);
 app.use("/api/v1/agent", agentRoutes);
